@@ -52,8 +52,9 @@ class ImageWindow:
                 image=self.taskbar_image
             )
             
-            # Bind click event to taskbar image
-            self.canvas.tag_bind(self.taskbar_image_id, "<Button-1>", self.on_taskbar_image_click)
+            # Bind click events to taskbar image
+            self.canvas.tag_bind(self.taskbar_image_id, "<Button-1>", self.on_taskbar_image_click)  # Left-click
+            self.canvas.tag_bind(self.taskbar_image_id, "<Button-3>", self.on_taskbar_image_right_click)  # Right-click
             
             # Bind hover events for mouse enter and leave
             self.canvas.tag_bind(self.taskbar_image_id, "<Enter>", self.on_taskbar_image_hover)
@@ -68,8 +69,13 @@ class ImageWindow:
             error_label.pack(pady=20)
     
     def on_taskbar_image_click(self, event):
-        print("Taskbar image clicked!")
-        # Additional logic when image is clicked can go here
+        print("Taskbar image left-clicked!")
+        # Additional logic when image is left-clicked can go here
+    
+    def on_taskbar_image_right_click(self, event):
+        print("Taskbar image right-clicked!")
+        # Additional logic for right-click can go here, like showing a menu or performing an action
+        self.show_right_click_menu(event)
     
     def on_taskbar_image_hover(self, event):
         print("Mouse hovered over taskbar image!")
@@ -80,6 +86,17 @@ class ImageWindow:
         print("Mouse left the taskbar image!")
         # Revert the image back to the original
         self.canvas.itemconfig(self.taskbar_image_id, image=self.taskbar_image)
+
+    def show_right_click_menu(self, event):
+        # Example right-click menu that appears at the mouse position
+        menu = tk.Menu(self.root, tearoff=0)
+        menu.add_command(label="Option 1", command=lambda: print("Option 1 selected"))
+        menu.add_command(label="Option 2", command=lambda: print("Option 2 selected"))
+        menu.add_separator()
+        menu.add_command(label="Exit", command=self.root.quit)
+        
+        # Position the menu at the mouse click location
+        menu.post(event.x_root, event.y_root)
 
 def main():
     root = tk.Tk()
