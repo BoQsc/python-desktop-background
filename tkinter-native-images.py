@@ -60,6 +60,10 @@ class ImageWindow:
             self.canvas.tag_bind(self.taskbar_image_id, "<Enter>", self.on_taskbar_image_hover)
             self.canvas.tag_bind(self.taskbar_image_id, "<Leave>", self.on_taskbar_image_leave)
             
+            # Initialize fade parameters
+            self.alpha = 0  # Transparency (0 means fully transparent, 1 means fully opaque)
+            self.fade_speed = 0.05  # Speed of fade in and out
+            
         except tk.TclError as e:
             print(f"Error loading images: {e}")
             error_label = ttk.Label(
@@ -79,13 +83,36 @@ class ImageWindow:
     
     def on_taskbar_image_hover(self, event):
         print("Mouse hovered over taskbar image!")
-        # Change the image to the hovered version
-        self.canvas.itemconfig(self.taskbar_image_id, image=self.hovered_image)
+        # Start fade-in effect
+        self.fade_in()
     
     def on_taskbar_image_leave(self, event):
         print("Mouse left the taskbar image!")
-        # Revert the image back to the original
-        self.canvas.itemconfig(self.taskbar_image_id, image=self.taskbar_image)
+        # Start fade-out effect
+        self.fade_out()
+
+    def fade_in(self):
+        if self.alpha < 1:  # Check if alpha is less than 1 (fully opaque)
+            self.alpha += self.fade_speed
+            self.update_image_opacity()
+            self.root.after(30, self.fade_in)  # Continue fading in by calling this method repeatedly
+
+    def fade_out(self):
+        if self.alpha > 0:  # Check if alpha is greater than 0 (fully transparent)
+            self.alpha -= self.fade_speed
+            self.update_image_opacity()
+            self.root.after(30, self.fade_out)  # Continue fading out by calling this method repeatedly
+
+    def update_image_opacity(self):
+        # Apply the new opacity to the hover image by manipulating its alpha
+        new_image = self.apply_alpha_to_image(self.hovered_image, self.alpha)
+        self.canvas.itemconfig(self.taskbar_image_id, image=new_image)
+
+    def apply_alpha_to_image(self, image, alpha):
+        # This method is a placeholder where you would implement the logic to apply alpha transparency to the image.
+        # Tkinter itself doesn't directly support alpha channels, so you would typically use a third-party library for image manipulation.
+        # For simplicity, we're assuming you can generate an image with varying opacity here.
+        return image  # Placeholder, no actual alpha manipulation in Tkinter
 
     def show_right_click_menu(self, event):
         # Example right-click menu that appears at the mouse position
