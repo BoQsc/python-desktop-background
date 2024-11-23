@@ -35,7 +35,6 @@ class ImageWindow:
             self.canvas.pack(fill='both', expand=True)
             
             # Set background image
-            # We'll scale the image to fit the window
             self.canvas.create_image(
                 window_width//2,  # center x
                 window_height//2, # center y
@@ -45,12 +44,15 @@ class ImageWindow:
             # Load taskbar image
             self.taskbar_image = tk.PhotoImage(file="taskbar_transparent.png")
             
-            # Add taskbar image to center
-            self.canvas.create_image(
+            # Add taskbar image to center and bind click event
+            taskbar_image_id = self.canvas.create_image(
                 window_width//2,  # center x
                 window_height//2, # center y
                 image=self.taskbar_image
             )
+            
+            # Bind click event to taskbar image
+            self.canvas.tag_bind(taskbar_image_id, "<Button-1>", self.on_taskbar_image_click)
             
         except tk.TclError as e:
             print(f"Error loading images: {e}")
@@ -59,6 +61,10 @@ class ImageWindow:
                 text="Error: Could not load image files!\nMake sure both PNG files exist in the correct location."
             )
             error_label.pack(pady=20)
+    
+    def on_taskbar_image_click(self, event):
+        print("Taskbar image clicked!")
+        # Additional logic when image is clicked can go here
 
 def main():
     root = tk.Tk()
