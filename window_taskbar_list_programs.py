@@ -30,16 +30,20 @@ def create_taskbar_window():
     canvas.pack(fill=tk.BOTH, expand=True)
     canvas.create_image(0, 0, anchor=tk.NW, image=bg_image)
 
-    # Make the entire window semi-transparent (optional for overall transparency)
-    root.attributes('-alpha', 0.95)
+    # Simulate a semi-transparent taskbar using a canvas rectangle
+    taskbar_height = 40
+    taskbar_y = root.winfo_screenheight() - taskbar_height
+    canvas.create_rectangle(
+        0, taskbar_y, root.winfo_screenwidth(), root.winfo_screenheight(),
+        fill="#555555", stipple="gray50", outline=""
+    )
 
-    # Create the taskbar frame
-    taskbar = tk.Frame(root, bg="#888888")  # Hex color for gray
-    canvas.create_window(0, root.winfo_screenheight() - 40, anchor=tk.NW, window=taskbar, height=40, width=root.winfo_screenwidth())
+    # Create a frame for taskbar content
+    taskbar = tk.Frame(canvas, bg="#555555")  # Color matches rectangle
+    canvas.create_window(0, taskbar_y, anchor=tk.NW, window=taskbar, height=taskbar_height, width=root.winfo_screenwidth())
 
-    # Programs frame inside the taskbar
-    programs_frame = tk.Frame(taskbar, bg="#888888")
-    programs_frame.attributes('-alpha',0.5)
+    # Frame for programs in the taskbar
+    programs_frame = tk.Frame(taskbar, bg="#555555")
     programs_frame.pack(side=tk.LEFT, padx=10, fill=tk.X, expand=True)
 
     pinned_programs = ["File Explorer", "Browser", "Notepad"]  # Example pinned programs
