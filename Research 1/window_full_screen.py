@@ -1,4 +1,9 @@
 import tkinter
+# Makes a canvas with a grid that is sticky to the N S E W
+# Maybe grid should not be used for background image.
+# background image should be a separate widget from Window to allow for modularity and separation from Window.
+# background image should be custom canvas widget.
+
 
 window = tkinter.Tk()
 window.attributes('-fullscreen', True)
@@ -19,14 +24,11 @@ canvas.create_image(0, 0, image=bg_image, anchor="nw")
 taskbar_image = tkinter.PhotoImage(file="taskbar_transparent.png")
 taskbar_width = window.winfo_screenwidth()
 
-# Stretch the taskbar image to the width of the window
 print(taskbar_image.height())
-taskbar_image_resized = taskbar_image.subsample(1, int(taskbar_image.height() / taskbar_image.height()))
 
-# Get the window's screen height after fullscreen
 screen_height = window.winfo_screenheight()
 
 # Place the taskbar image at the bottom of the screen
-canvas.create_image(taskbar_width // 2, screen_height, image=taskbar_image_resized, anchor="s")
-
+canvas.create_image(50, 50, image=taskbar_image)
+    
 window.mainloop()
