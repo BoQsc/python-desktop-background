@@ -20,6 +20,7 @@ taskbar_image = tkinter.PhotoImage(file="taskbar_transparent.png")
 taskbar_width = window.winfo_screenwidth()
 
 # Stretch the taskbar image to the width of the window
+print(taskbar_image.height())
 taskbar_image_resized = taskbar_image.subsample(1, int(taskbar_image.height() / taskbar_image.height()))
 
 # Get the window's screen height after fullscreen
