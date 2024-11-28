@@ -2,7 +2,7 @@ import tkinter
 window = tkinter.Tk()
 window.title("Window Canvas")
 
-canvas = tkinter.Canvas(bg="gray", bd=0, highlightthickness=0)
+canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
 
 
 
