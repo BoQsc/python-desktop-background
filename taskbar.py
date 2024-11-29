@@ -59,6 +59,8 @@ class Taskbar(tk.Canvas):
             # Move the rectangle horizontally with the mouse
             self.coords(rect, event.x - self.offset_x, 0,
                         event.x - self.offset_x + self.rect_width, self.rect_height)
+            # Bring the dragged rectangle to the top
+            self.tag_raise(rect)
 
     def on_release(self, event):
         if self.dragging is not None:
