@@ -14,10 +14,9 @@ def resize_background(event):
     subsample_factor = max(int(scale_x), int(scale_y))
     
     # Subsample the image to fit the new window size
-    if subsample_factor > 1:
-        scaled_image = background_image.subsample(subsample_factor, subsample_factor)
-    else:
-        scaled_image = background_image
+
+    scaled_image = background_image.subsample(subsample_factor, subsample_factor)
+
     
     # Update the canvas image
     canvas.itemconfig(image_on_canvas, image=scaled_image)
