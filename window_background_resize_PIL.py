@@ -1,51 +1,85 @@
-from tkinter import Tk, Canvas, PhotoImage, NW
+import tkinter as tk
 from PIL import Image, ImageTk
+import io
 
-def resize_image(event):
-    # Calculate scale factors
-    width_scale = event.width / original_width
-    height_scale = event.height / original_height
+class SmoothBackground:
+    def __init__(self, root, image_path):
+        self.root = root
+        self.canvas = tk.Canvas(root, width=900, height=900)
+        self.canvas.pack(fill="both", expand=True)
 
-    # Choose the larger scale to ensure full window coverage
-    scale = max(width_scale, height_scale)
+        # Load original high-quality image
+        self.original_image = Image.open(image_path)
+        self.original_width = self.original_image.width
+        self.original_height = self.original_image.height
 
-    # Calculate the new image size
-    new_img_width = int(original_width * scale)
-    new_img_height = int(original_height * scale)
+        # Cache for resized images to improve performance
+        self.image_cache = {}
+        self.last_resize_width = 0
+        self.last_resize_height = 0
 
-    # Resize image maintaining aspect ratio
-    resized_pil_image = pil_image.resize((new_img_width, new_img_height), Image.LANCZOS)
-    
-    # Convert to PhotoImage
-    resized_image = ImageTk.PhotoImage(resized_pil_image)
+        # Store the current PhotoImage to prevent garbage collection
+        self.current_photo = None
 
-    # Update the canvas image
-    canvas.itemconfig(image_id, image=resized_image)
-    canvas.image = resized_image  # Keep a reference to avoid garbage collection
+        # Bind resize event with optimized handler
+        self.root.bind("<Configure>", self.on_resize)
 
-    # Center the image in the canvas
-    x = (event.width - new_img_width) // 2
-    y = (event.height - new_img_height) // 2
-    canvas.coords(image_id, x, y)
+        # Initial display
+        self.display_image(self.root.winfo_width(), self.root.winfo_height())
 
-# Create window
-root = Tk()
-root.geometry("400x400")
+    def on_resize(self, event):
+        # Debounce resize events
+        if (abs(event.width - self.last_resize_width) > 10 or 
+            abs(event.height - self.last_resize_height) > 10):
+            self.display_image(event.width, event.height)
 
-# Create canvas
-canvas = Canvas(root, width=400, height=400)
-canvas.pack(fill="both", expand=True)
+    def display_image(self, width, height):
+        # Calculate scale factors
+        width_scale = width / self.original_width
+        height_scale = height / self.original_height
 
-# Load original image using PIL
-pil_image = Image.open("background.png")
-original_width = pil_image.width
-original_height = pil_image.height
+        # Choose the larger scale to ensure full window coverage
+        scale = max(width_scale, height_scale)
 
-# Add image to canvas
-original_image = ImageTk.PhotoImage(pil_image)
-image_id = canvas.create_image(0, 0, image=original_image, anchor=NW)
+        # Calculate new dimensions
+        new_width = int(self.original_width * scale)
+        new_height = int(self.original_height * scale)
 
-# Bind window resizing event
-root.bind("<Configure>", resize_image)
+        # Check cache first
+        cache_key = (new_width, new_height)
+        if cache_key not in self.image_cache:
+            # High-quality resize
+            resized_image = self.original_image.copy()
+            resized_image = resized_image.resize(
+                (new_width, new_height), 
+                Image.LANCZOS  # Highest quality resampling
+            )
+            
+            # Convert to PhotoImage
+            self.image_cache[cache_key] = ImageTk.PhotoImage(resized_image)
 
+        # Get image from cache
+        self.current_photo = self.image_cache[cache_key]
+
+        # Clear previous image and add new one
+        self.canvas.delete("all")
+        self.canvas.create_image(
+            width // 2, height // 2,  # Center the image
+            image=self.current_photo, 
+            anchor='center'
+        )
+
+        # Update last resize dimensions
+        self.last_resize_width = width
+        self.last_resize_height = height
+
+# Create main window
+root = tk.Tk()
+root.geometry("800x600")
+root.title("Smooth Background Scaling")
+
+# Initialize smooth background
+SmoothBackground(root, "background.png")
+
+# Start the application
 root.mainloop()
