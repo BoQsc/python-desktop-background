@@ -15,3 +15,5 @@ Even if the resizing algorithm is found, it would need to support various media 
 Not to mention that PhotoImage subsampling is only for Images and Video background would need different approach.
 
 Even if subsampling was applied, the background image will never match screen size correctly.
+
+The external libraries that manage image resizing might come with high accuracy leading to a need of optimization when applying background-resize depending on window size.
