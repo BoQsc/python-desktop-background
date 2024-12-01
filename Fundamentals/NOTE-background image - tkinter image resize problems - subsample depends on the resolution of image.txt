@@ -18,4 +18,5 @@ Even if subsampling was applied, the background image will never match screen si
 
 The external libraries that manage image resizing might come with high accuracy leading to a need of optimization when applying background-resize depending on window size.
 
+Manual pre-resized images method without subsampling or third party library:
 A less covenient way would be to create a folder "background" and place inside it many pre-resized background of different resolutions: background_1920x1080.png background_1280x720.png 
