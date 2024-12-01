@@ -1,0 +1,1 @@
+window.bind("<Configure>", lambda event: print(event.width, event.height))
