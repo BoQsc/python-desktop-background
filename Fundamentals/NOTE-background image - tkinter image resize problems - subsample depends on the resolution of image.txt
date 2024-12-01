@@ -17,3 +17,5 @@ Not to mention that PhotoImage subsampling is only for Images and Video backgrou
 Even if subsampling was applied, the background image will never match screen size correctly.
 
 The external libraries that manage image resizing might come with high accuracy leading to a need of optimization when applying background-resize depending on window size.
+
+A less covenient way would be to create a folder "background" and place inside it many pre-resized background of different resolutions: background_1920x1080.png background_1280x720.png 
