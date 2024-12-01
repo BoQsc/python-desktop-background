@@ -4,3 +4,9 @@ Since the implementation goal is to have no more than 1 MB in size for entire pr
 
 Or suffer the cost of 10MB PNG image and use subsampling method provided by tkinter PhotoImage.
 
+Most likely the users will not be happy to provide way larger images as background images than originals they would download from internet or create.
+
+It also makes it not very logical to ask user for better resolution image just because the native tkinter resizing method (subsampling) does not support fractional subsampling.
+
+
+
