@@ -8,5 +8,6 @@ Most likely the users will not be happy to provide way larger images as backgrou
 
 It also makes it not very logical to ask user for better resolution image just because the native tkinter resizing method (subsampling) does not support fractional subsampling.
 
+Dependency on Third party might be inevitable unless a simple and concise algorithm is found or resizing image.
 
-
+Even if the resizing algorithm is found, it would need to support various media types which would extend to a larger project anyways.
