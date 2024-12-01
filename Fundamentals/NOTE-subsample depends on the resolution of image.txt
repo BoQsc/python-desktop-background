@@ -11,3 +11,5 @@ It also makes it not very logical to ask user for better resolution image just b
 Dependency on Third party might be inevitable unless a simple and concise algorithm is found or resizing image.
 
 Even if the resizing algorithm is found, it would need to support various media types which would extend to a larger project anyways.
+
+Not to mention that PhotoImage subsampling is only for Images and Video background would need different approach.
