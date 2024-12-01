@@ -1,0 +1,4 @@
+Subsample only supports subsampling by integer which requires large image to subsample an image more gradually.
+
+Since the implementation goal is to have no more than 1 MB in size for entire project, it is needed to look for thirdparty image resizing library like PIL.
+
