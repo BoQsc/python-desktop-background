@@ -2,5 +2,5 @@ Subsample only supports subsampling by integer which requires large image to sub
 
 Since the implementation goal is to have no more than 1 MB in size for entire project, it is needed to look for thirdparty image resizing library like PIL.
 
-Or suffer the cost of 10MB PNG image and use subsample provided by tkinter PhotoImage subsampling.
+Or suffer the cost of 10MB PNG image and use subsampling method provided by tkinter PhotoImage.
 
