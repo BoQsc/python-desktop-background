@@ -13,3 +13,5 @@ Dependency on Third party might be inevitable unless a simple and concise algori
 Even if the resizing algorithm is found, it would need to support various media types which would extend to a larger project anyways.
 
 Not to mention that PhotoImage subsampling is only for Images and Video background would need different approach.
+
+Even if subsampling was applied, the background image will never match screen size correctly.
