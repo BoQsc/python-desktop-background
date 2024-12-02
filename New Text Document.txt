@@ -1,0 +1,1 @@
+expand background in height no matter the width.
