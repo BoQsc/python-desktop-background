@@ -15,8 +15,6 @@ background_image = ImageTk.PhotoImage(background_image)
     
 
 canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
-
-
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_image)
 
 def resize_image(event):
