@@ -22,3 +22,4 @@ Manual pre-resized images method without subsampling or third party library, tra
 A less covenient way would be to create a folder "background" and place inside it many pre-resized background of different resolutions: background_1920x1080.png background_1280x720.png 
 
 I tried to come up with background_bilinear_interpolation_resize.py, but it was too slow and best if Operating System kernel would implement this routine.
+Implementing an efficient algorithm (e.g., bilinear interpolation) in pure Python can be too slow for practical use.
