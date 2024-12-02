@@ -3,3 +3,7 @@ Python: what single library would allow me to play mp4 with sound, manipulate im
 One dependency that is multifunctional is Kivy, however it takes 20MB of whl dependency downloads using pip.
 
 pip download Kivy --dest ./
+
+
+Another 60mb dependency to kivy to play mp4, and it plays with sound.
+pip install ffpyplayer
