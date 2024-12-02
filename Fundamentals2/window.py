@@ -7,11 +7,12 @@ window.title("Window Canvas")
 # Image_loader
 background_file = "background.png"
 
-background_PhotoImage = tkinter.PhotoImage(file=background_file)
 
 from PIL import Image, ImageTk
 background_ImageFile = Image.open(background_file)
-background_PhotoImage = ImageTk.PhotoImage(background_ImageFile)
+background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
+
+#background_PhotoImage = tkinter.PhotoImage(file=background_file)
 
     
 
