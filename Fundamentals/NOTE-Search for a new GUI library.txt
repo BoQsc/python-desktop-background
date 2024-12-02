@@ -7,3 +7,7 @@ pip download Kivy --dest ./
 
 Another 60mb dependency to kivy to play mp4, and it plays with sound.
 pip install ffpyplayer
+
+
+It might be better to look for specific libraries to improve tkinter.
+Usage of PIL and Video Player + Audio libraries for tkinter.
