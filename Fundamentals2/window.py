@@ -6,16 +6,17 @@ window.title("Window Canvas")
 
 # Image_loader
 background_file = "background.png"
-background_image = tkinter.PhotoImage(file=background_file)
+
+background_PhotoImage = tkinter.PhotoImage(file=background_file)
 
 from PIL import Image, ImageTk
-background_image = Image.open(background_file)
-background_image = ImageTk.PhotoImage(background_image)
+background_ImageFile = Image.open(background_file)
+background_PhotoImage = ImageTk.PhotoImage(background_ImageFile)
 
     
 
 canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
-canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_image)
+canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_PhotoImage)
 
 def resize_image(event):
 
