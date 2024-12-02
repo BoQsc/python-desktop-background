@@ -3,12 +3,12 @@ import tkinter
 window = tkinter.Tk()
 window.title("Window Canvas")
 
-from PIL import Image, ImageTk
 
 # Image_loader
 background_file = "background.png"
 background_image = tkinter.PhotoImage(file=background_file)
 
+from PIL import Image, ImageTk
 background_image = Image.open(background_file)
 background_image = ImageTk.PhotoImage(background_image)
 
