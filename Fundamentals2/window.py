@@ -1,30 +1,35 @@
 import tkinter
+from PIL import Image, ImageTk
+
 window = tkinter.Tk()
 window.title("Window Canvas")
 
 print("_______PIP Auto install Dependencies__________")
 print("_______PIL Loading background PhotoImage__________")
 
-from PIL import Image, ImageTk
 background_file = "background.png"
-background_ImageFile = Image.open(background_file)
-background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
-
+background_image = Image.open(background_file)
+background_photo = ImageTk.PhotoImage(image=background_image)
 
 print("________TK Loading canvas widget__________")
-canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
-canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_PhotoImage)
+canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
+canvas.pack(fill="both", expand=True) 
+canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
 def background_image_resize(event):
     print(event.width, event.height)
-    pass
+    resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
+    resized_photo = ImageTk.PhotoImage(resized_image)
+
+    canvas.itemconfig(canvas_background_widget, image=resized_photo)
+    canvas.resized_image = resized_photo 
 
 def on_window_event(event):
-    canvas.place_configure(width=event.width, height=event.height)
+    canvas.config(width=event.width, height=event.height)
     background_image_resize(event)
+
 window.bind("<Configure>", on_window_event)
 
-# Implement background image resize based on canvas size.
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
 window.mainloop()
