@@ -4,7 +4,7 @@ window = tkinter.Tk()
 window.title("Window Canvas")
 
 
-print("_______Loading background PhotoImage__________")
+print("_______PIL Loading background PhotoImage__________")
 background_file = "background.png"
 try:
     from PIL import Image, ImageTk
@@ -13,7 +13,7 @@ try:
 except ImportError:
     print("PIL Module is not installed.")
     
-print("__________Loading tkinter canvas widget__________")
+print("__________tkinter Loading canvas widget__________")
 canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_PhotoImage)
 
