@@ -16,7 +16,7 @@ background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
 print("________Canvas Taskbar__________")
-taskbar_height = 50  # Height of the taskbar
+taskbar_height = 50  
 taskbar = canvas.create_rectangle(0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), fill="black")
 
 print("________TK Window Events__________")
@@ -29,7 +29,6 @@ def background_image_resize(event):
 def on_window_event(event):
     canvas.config(width=event.width, height=event.height)
     background_image_resize(event)
-    # Update the taskbar's position and size when the window is resized
     canvas.coords(taskbar, 0, event.height - taskbar_height, event.width, event.height)
 
 window.bind("<Configure>", on_window_event)
