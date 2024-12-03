@@ -12,7 +12,7 @@ try:
 except ImportError:
     print("PIL Module is not installed.")
     
-print("_______TK Loading canvas widget__________")
+print("________TK Loading canvas widget__________")
 canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_PhotoImage)
 
