@@ -4,7 +4,7 @@ window = tkinter.Tk()
 window.title("Window Canvas")
 
 
-print("_______Loading background image__________")
+print("_______Loading background PhotoImage__________")
 background_file = "background.png"
 try:
     from PIL import Image, ImageTk
