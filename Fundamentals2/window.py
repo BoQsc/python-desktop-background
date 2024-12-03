@@ -16,6 +16,8 @@ canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True) 
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
+
+print("________TK Window Events__________")
 def background_image_resize(event):
     resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
     canvas.resized_photo = ImageTk.PhotoImage(resized_image)
