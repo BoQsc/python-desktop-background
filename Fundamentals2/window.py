@@ -17,14 +17,13 @@ print("__________Loading canvas widget__________")
 canvas = tkinter.Canvas(bg="gray", highlightthickness=0)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_PhotoImage)
 
-def resize_image(event):
-
-
-    #canvas_background.resize()
+def background_image_resize(event):
+    print(event.width, event.height)
     pass
 
 def window_configure(event):
     canvas.place_configure(width=event.width, height=event.height)
+    background_image_resize(event)
 window.bind("<Configure>", window_configure)
 
 
