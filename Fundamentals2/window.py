@@ -35,7 +35,8 @@ def background_image_resize(event):
     canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
 
 def taskbar_image_resize(event):
-    resized_image = taskbar_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
+    # 40 is hardcoded for now.
+    resized_image = taskbar_image.resize((event.width, 40), Image.Resampling.LANCZOS)
     canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
     canvas.itemconfig(image_taskbar, image=canvas.tresized_photo)
 
