@@ -4,15 +4,19 @@ window = tkinter.Tk()
 window.title("Window Canvas")
 
 
-# Image_loader
+# Background Image_loader
 background_file = "background.png"
 
 
-from PIL import Image, ImageTk
-background_ImageFile = Image.open(background_file)
-background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
+try:
+    from PIL import Image, ImageTk
+    background_ImageFile = Image.open(background_file)
+    background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
+except ImportError:
+    print("PIL Module is not installed.")
+    background_PhotoImage = tkinter.PhotoImage(file=background_file)
 
-#background_PhotoImage = tkinter.PhotoImage(file=background_file)
+
 
     
 
