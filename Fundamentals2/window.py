@@ -29,7 +29,6 @@ def on_window_event(event):
     background_image_resize(event)
 
 window.bind("<Configure>", on_window_event)
-
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
 window.mainloop()
