@@ -17,7 +17,7 @@ canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=backgrou
 
 print("________Canvas Taskbar__________")
 taskbar_height = 50  
-taskbar = canvas.create_rectangle(0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), fill="black")
+taskbar = canvas.create_rectangle(0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), fill="black", outline="")
 
 print("________TK Window Events__________")
 def background_image_resize(event):
