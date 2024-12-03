@@ -18,10 +18,9 @@ canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=backgrou
 
 def background_image_resize(event):
     resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
-    resized_photo = ImageTk.PhotoImage(resized_image)
-
-    canvas.itemconfig(canvas_background_widget, image=resized_photo)
-    canvas.resized_image = resized_photo 
+    canvas.resized_photo = ImageTk.PhotoImage(resized_image)
+    canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
+    
 
 def on_window_event(event):
     canvas.config(width=event.width, height=event.height)
