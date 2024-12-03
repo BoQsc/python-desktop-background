@@ -19,8 +19,8 @@ print("________Canvas Taskbar__________")
 taskbar_height = 50  
 taskbar = canvas.create_rectangle(0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), fill="black", outline="")
 
-#taskbar_image = Image.new("RGBA", (canvas.winfo_width(), taskbar_height), (0, 0, 255, 128))  # (R, G, B, A)
-#taskbar_photo = ImageTk.PhotoImage(taskbar_image)
+taskbar_image = Image.new("RGBA", (canvas.winfo_width(), taskbar_height), (0, 0, 255, 128))  # (R, G, B, A)
+taskbar_photo = ImageTk.PhotoImage(taskbar_image)
 
 #taskbar = canvas.create_image(0, canvas.winfo_height() - taskbar_height, anchor="nw", image=taskbar_photo)
 
@@ -40,7 +40,7 @@ def on_window_event(event):
     background_image_resize(event)
     canvas.coords(taskbar, 0, event.height - taskbar_height, event.width, event.height)
     #canvas.coords(taskbar, 0, event.height - taskbar_height)
-    taskbar_image_resize(event)
+    #taskbar_image_resize(event)
 
 window.bind("<Configure>", on_window_event)
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
