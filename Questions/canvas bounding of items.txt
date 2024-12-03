@@ -1,0 +1,1 @@
+In a canvas, what are the ways to bound into single thing (object) so it all be part of one and interact with each other or be bounded and aware.
