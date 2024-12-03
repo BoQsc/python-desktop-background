@@ -5,16 +5,16 @@ window = tkinter.Tk()
 window.title("Window Canvas")
 
 print("_______PIP Auto install Dependencies__________")
-print("_______PIL Loading background PhotoImage__________")
-
-background_file = "background.png"
-background_image = Image.open(background_file)
-background_photo = ImageTk.PhotoImage(image=background_image)
-
 print("________TK Loading canvas widget__________")
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True) 
+
+print("_______PIL Loading background PhotoImage__________")
+background_file = "background.png"
+background_image = Image.open(background_file)
+background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
+
 
 
 print("________TK Window Events__________")
