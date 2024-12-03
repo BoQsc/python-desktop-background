@@ -15,8 +15,6 @@ background_image = Image.open(background_file)
 background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
-
-
 print("________TK Window Events__________")
 def background_image_resize(event):
     resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
