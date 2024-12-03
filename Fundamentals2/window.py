@@ -25,7 +25,6 @@ def on_window_event(event):
     background_image_resize(event)
 window.bind("<Configure>", on_window_event)
 
-
 # Implement background image resize based on canvas size.
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
