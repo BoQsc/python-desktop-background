@@ -6,14 +6,12 @@ window.title("Window Canvas")
 
 # Background Image_loader
 background_file = "background.png"
-
-
 try:
     from PIL import Image, ImageTk
     background_ImageFile = Image.open(background_file)
     background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
 except ImportError:
-    print("PIL Module is not installed.")
+    print("PIL Module is not installed. tkinter PhotoImage used instead.")
     background_PhotoImage = tkinter.PhotoImage(file=background_file)
 
 
