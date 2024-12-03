@@ -4,8 +4,9 @@ window.title("Window Canvas")
 
 print("_______PIP Auto install Dependencies__________")
 print("_______PIL Loading background PhotoImage__________")
-background_file = "background.png"
+
 from PIL import Image, ImageTk
+background_file = "background.png"
 background_ImageFile = Image.open(background_file)
 background_PhotoImage = ImageTk.PhotoImage(image=background_ImageFile)
 
