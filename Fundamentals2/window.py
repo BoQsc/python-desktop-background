@@ -21,10 +21,10 @@ def background_image_resize(event):
     print(event.width, event.height)
     pass
 
-def window_configure(event):
+def on_window_configure_event(event):
     canvas.place_configure(width=event.width, height=event.height)
     background_image_resize(event)
-window.bind("<Configure>", window_configure)
+window.bind("<Configure>", on_window_configure_event)
 
 
 # Implement background image resize based on canvas size.
