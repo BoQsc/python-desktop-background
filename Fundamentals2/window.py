@@ -1,3 +1,4 @@
+print("Python Desktop. Public Domain. No rights reserved.")
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget__________")
 import tkinter
