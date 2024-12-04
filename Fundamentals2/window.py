@@ -1,11 +1,20 @@
+print("_______PIP Auto install Dependencies__________")
 import tkinter
 from PIL import Image, ImageTk
-on_window_event_callbacks = []
 
 window = tkinter.Tk()
 window.title("Window Canvas")
 
-print("_______PIP Auto install Dependencies__________")
+print("________TK Window Events__________")
+on_window_event_callbacks = []
+def on_window_event(event):
+    canvas.config(width=event.width, height=event.height)
+    for callback in on_window_event_callbacks:
+        callback(event)
+
+window.bind("<Configure>", on_window_event)
+window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
+
 print("________TK Loading canvas widget__________")
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True)
@@ -49,14 +58,5 @@ def taskbar_image_resize(event):
     canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
 
 on_window_event_callbacks.append(taskbar_image_resize)
-
-print("________TK Window Events__________")
-def on_window_event(event):
-    canvas.config(width=event.width, height=event.height)
-    for callback in on_window_event_callbacks:
-        callback(event)
-
-window.bind("<Configure>", on_window_event)
-window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
 window.mainloop()
