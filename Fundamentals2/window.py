@@ -16,6 +16,13 @@ background_image = Image.open(background_file)
 background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
+def background_image_resize(event):
+    resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
+    canvas.resized_photo = ImageTk.PhotoImage(resized_image)
+    canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
+
+on_window_event_callbacks.append(background_image_resize)
+
 print("________Canvas Taskbar__________")
 taskbar_height = 40
 
@@ -29,7 +36,6 @@ taskbar_image = Image.open("taskbar.png")
 taskbar_photo = ImageTk.PhotoImage(taskbar_image)
 image_taskbar = canvas.create_image(0, 0, anchor="nw", image=taskbar_photo)
 
-
 def taskbar_resize(event):
     resized_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.LANCZOS)
     canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
@@ -40,16 +46,8 @@ def taskbar_resize(event):
 on_window_event_callbacks.append(taskbar_resize)
 
 print("________TK Window Events__________")
-def background_image_resize(event):
-    resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
-    canvas.resized_photo = ImageTk.PhotoImage(resized_image)
-    canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
-
-
-
 def on_window_event(event):
     canvas.config(width=event.width, height=event.height)
-    background_image_resize(event)
     for callback in on_window_event_callbacks:
         callback(event)
 
