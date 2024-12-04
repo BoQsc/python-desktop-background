@@ -4,4 +4,7 @@ Notification Area (System Tray Area) (Indicators area)
 
 In Windows 10: The taskbar itself seems to have merged into Pinned Apps area. Providing both: Quick Launch and Task bar.
 
+"Rectangles group" or "Images Group" with bounding box for detecting bounding area events.
 Adding rectangular bounding box around grouped items/things to detect the bounding area events.
+https://chatgpt.com/c/6750c83e-2530-800b-9b06-692432aaf419
+
