@@ -1,0 +1,1 @@
+print("Python Desktop [Version 0.0.0]".replace("0.0.0", str(__import__('tkinter').TkVersion)))
