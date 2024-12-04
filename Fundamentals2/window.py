@@ -1,4 +1,4 @@
-print("Python Desktop [Version 0.0.0]".replace("0.0.0", str(__import__('tkinter').TkVersion)))
+print("Python Desktop [Version 0.0.0]".replace("0.0.0", version:=str(__import__('tkinter').TkVersion)))
 print("Public Domain. No rights reserved.")
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget______________________")
