@@ -46,11 +46,9 @@ def on_window_event(event):
     background_image_resize(event)
     
     taskbar_image_resize(event)
-    try:  
-        canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
+    canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
+    canvas.coords(rectangle_taskbar, 0, event.height - taskbar_height, event.width, event.height)
 
-        canvas.coords(rectangle_taskbar, 0, event.height - taskbar_height, event.width, event.height)
-    except: pass
 window.bind("<Configure>", on_window_event)
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
