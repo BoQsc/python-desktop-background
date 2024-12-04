@@ -3,3 +3,5 @@ The middle section of Taskbar: Pinned applications. (Quick launch toolbar)
 Notification Area (System Tray Area) (Indicators area)
 
 In Windows 10: The taskbar itself seems to have merged into Pinned Apps area. Providing both: Quick Launch and Task bar.
+
+Adding rectangular bounding box around grouped items/things to detect the bounding area events.
