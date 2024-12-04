@@ -2,11 +2,13 @@ print(program:="Python Desktop [Version 0.0.0]".replace("0.0.0", version:="0.0.1
 print(credits:="Public Domain. No rights reserved.")
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget______________________")
+import os
+os.system('title ' + program + "(Console)")
 import tkinter
 from PIL import Image, ImageTk
 
 window = tkinter.Tk()
-window.title(program + " (Window Canvas)")
+window.title(program + "(Window Canvas)")
 
 print("________TK Window Events______________________")
 on_window_event_callbacks = []
