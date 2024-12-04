@@ -52,6 +52,7 @@ on_window_event_callbacks.append(taskbar_resize)
 #TODO: Use tags and itemconfig to make a new element that has rectangle and image associated.
 # Taskbar rectangle might be renamed to taskbar frame for positioning or standalone use of taskbar when image is not available.
 # However it would be simplier to just use image item without creating unecessary shapes like rectangle.
+# The image item could be drawn in color if the image is not found on the file system.
 print("________Canvas Taskbar Image__________")
 taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))  # Initial size of 1px
 taskbar_image = Image.open("taskbar.png")
