@@ -26,24 +26,29 @@ on_window_event_callbacks.append(background_image_resize)
 print("________Canvas Taskbar__________")
 taskbar_height = 40
 
-rectangle_taskbar = canvas.create_rectangle(
+taskbar_rectangle = canvas.create_rectangle(
     0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), 
     fill="black", outline=""
 )
 
+def taskbar_resize(event):
+    canvas.coords(taskbar_rectangle, 0, event.height - taskbar_height, event.width, event.height)
+
+on_window_event_callbacks.append(taskbar_resize)
+
+print("________Canvas Taskbar Image__________")
 taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))  # Initial size of 1px
 taskbar_image = Image.open("taskbar.png")
 taskbar_photo = ImageTk.PhotoImage(taskbar_image)
 image_taskbar = canvas.create_image(0, 0, anchor="nw", image=taskbar_photo)
 
-def taskbar_resize(event):
+def taskbar_image_resize(event):
     resized_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.LANCZOS)
     canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
     canvas.itemconfig(image_taskbar, image=canvas.tresized_photo)
     canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
-    canvas.coords(rectangle_taskbar, 0, event.height - taskbar_height, event.width, event.height)
 
-on_window_event_callbacks.append(taskbar_resize)
+on_window_event_callbacks.append(taskbar_image_resize)
 
 print("________TK Window Events__________")
 def on_window_event(event):
