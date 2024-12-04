@@ -1,4 +1,4 @@
-print("Python Desktop [Version 0.0.0]".replace("0.0.0", ))
+print("Python Desktop [Version 0.0.0]".replace("0.0.0", "0.0.1"))
 print("Public Domain. No rights reserved.")
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget______________________")
