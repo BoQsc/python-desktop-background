@@ -1,0 +1,5 @@
+Start Menu button should be separate from taskbar applications.
+The middle section of Taskbar: Pinned applications. (Quick launch toolbar)
+Notification Area (System Tray Area)
+
+In Windows 10: The taskbar itself seems to have merged into Pinned Apps area. Providing both: Quick Launch and Task bar.
