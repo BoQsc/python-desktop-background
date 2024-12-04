@@ -18,10 +18,10 @@ canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=backgrou
 print("________Canvas Taskbar__________")
 taskbar_height = 40
 
-#rectangle_taskbar = canvas.create_rectangle(
-#    0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), 
-#    fill="black", outline=""
-#)
+rectangle_taskbar = canvas.create_rectangle(
+    0, canvas.winfo_height() - taskbar_height, canvas.winfo_width(), canvas.winfo_height(), 
+    fill="black", outline=""
+)
 
 taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))  # Initial size of 1px
 taskbar_image = Image.open("taskbar.png")
@@ -46,8 +46,9 @@ def on_window_event(event):
     background_image_resize(event)
     
     taskbar_image_resize(event)
-    canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
     try:  
+        canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
+
         canvas.coords(rectangle_taskbar, 0, event.height - taskbar_height, event.width, event.height)
     except: pass
 window.bind("<Configure>", on_window_event)
