@@ -48,6 +48,7 @@ def taskbar_resize(event):
 
 on_window_event_callbacks.append(taskbar_resize)
 
+#TODO: Resize depending on taskbar rectangle, allow taskbar rectangle to be subscribed to for Height, Width and Position.
 print("________Canvas Taskbar Image__________")
 taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))  # Initial size of 1px
 taskbar_image = Image.open("taskbar.png")
