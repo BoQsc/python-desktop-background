@@ -1,13 +1,14 @@
-print("Python Desktop. Public Domain. No rights reserved.")
+print("Python Desktop [Version 0.0.0]")
+print("Public Domain. No rights reserved.")
 print("_______PIP Auto install Dependencies__________")
-print("________TK Window Widget__________")
+print("________TK Window Widget______________________")
 import tkinter
 from PIL import Image, ImageTk
 
 window = tkinter.Tk()
 window.title("Window Canvas")
 
-print("________TK Window Events__________")
+print("________TK Window Events______________________")
 on_window_event_callbacks = []
 def on_window_event(event):
     canvas.config(width=event.width, height=event.height)
@@ -17,11 +18,11 @@ def on_window_event(event):
 window.bind("<Configure>", on_window_event)
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
-print("________TK Loading canvas widget__________")
+print("________TK Loading canvas widget______________")
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True)
 
-print("_______PIL Loading background PhotoImage__________")
+print("_______PIL Loading background PhotoImage______")
 background_file = "background.png"
 background_image = Image.open(background_file)
 background_photo = ImageTk.PhotoImage(image=background_image)
