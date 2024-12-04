@@ -8,7 +8,7 @@ import tkinter
 from PIL import Image, ImageTk
 
 window = tkinter.Tk()
-window.title(program + "(Window Canvas)")
+window.title(program)
 
 print("________TK Window Events______________________")
 on_window_event_callbacks = []
