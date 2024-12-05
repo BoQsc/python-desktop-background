@@ -1,0 +1,30 @@
+print("________Adding Rectangles to the Taskbar__________")
+rectangles = [] # needs to check if global variable exists
+
+def update_taskbar_rectangles(event):
+
+    def create_taskbar_rectangle(x, width, color="red"):
+        global rectangles
+        rect = canvas.create_rectangle(x, canvas.winfo_height() - taskbar_height,
+                                    x + width, canvas.winfo_height(), fill=color, outline="")
+        return rect
+    
+    rect_colors = ["red", "green", "blue", "yellow"]  
+    def add_taskbar_rectangles():
+        for i, color in enumerate(rect_colors):
+            rect = create_taskbar_rectangle(10 + i * 60, 50, color)  
+            rectangles.append(rect)
+
+    def update_rectangles_position(event):
+        print(len(rectangles))
+        for i, rect in enumerate(rectangles):
+            canvas.coords(rect, 10 + i * 60, event.height - taskbar_height,
+                        60 + i * 60, event.height)
+            
+    if len(rectangles) == 0:
+        print("tset", len(rectangles))
+        add_taskbar_rectangles()  
+
+    return update_rectangles_position(event)
+
+on_window_event_callbacks.append(update_taskbar_rectangles) # function.function does not provide with function id to run
