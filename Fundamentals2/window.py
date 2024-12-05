@@ -79,7 +79,6 @@ def create_taskbar_rectangle(x, width, color="red"):
 rectangles = []
 rect_colors = ["red", "green", "blue", "yellow"]  # Example colors
 
-# Add rectangles with varying positions and widths
 for i, color in enumerate(rect_colors):
     rect = create_taskbar_rectangle(10 + i * 60, 50, color)  # Example spacing and width
     rectangles.append(rect)
