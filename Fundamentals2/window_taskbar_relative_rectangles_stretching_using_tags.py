@@ -54,7 +54,7 @@ def taskbar_image_resize(event):
 
 on_window_event_callbacks.append(taskbar_image_resize)
 
-print("________Canvas Taskbar Image Rectangles__________")
+print("________Canvas Taskbar Image Rectangles_______")
 # Create rectangles using tags
 colors = ["red", "green", "blue", "yellow", "orange"]
 for i, color in enumerate(colors):
