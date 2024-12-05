@@ -46,19 +46,22 @@ taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))
 taskbar_photo = ImageTk.PhotoImage(taskbar_image)
 image_taskbar = canvas.create_image(0, 0, anchor="nw", image=taskbar_photo)
 
+def taskbar_image_resize(event):
+    resized_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.LANCZOS)
+    canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
+    canvas.itemconfig(image_taskbar, image=canvas.tresized_photo)
+    canvas.coords(image_taskbar, 0, event.height - taskbar_height)
+
+on_window_event_callbacks.append(taskbar_image_resize)
+
+print("________Canvas Taskbar Image Rectangles__________")
 # Create rectangles using tags
 colors = ["red", "green", "blue", "yellow", "orange"]
 for i, color in enumerate(colors):
     tag_name = f"rect_{i}"  # Unique tag for each rectangle
     canvas.create_rectangle(0, 0, 0, 0, fill=color, outline="", tags=tag_name)
 
-def taskbar_image_resize(event):
-    resized_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.LANCZOS)
-    canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
-    canvas.itemconfig(image_taskbar, image=canvas.tresized_photo)
-    canvas.coords(image_taskbar, 0, event.height - taskbar_height)
-    
-    # Update rectangle sizes and positions
+def taskbar_image_rectangles_resize(event):
     rect_width = event.width // 5
     for i in range(len(colors)):
         rect_x1 = i * rect_width
@@ -68,6 +71,7 @@ def taskbar_image_resize(event):
         tag_name = f"rect_{i}"
         canvas.coords(tag_name, rect_x1, rect_y1, rect_x2, rect_y2)
 
-on_window_event_callbacks.append(taskbar_image_resize)
+on_window_event_callbacks.append(taskbar_image_rectangles_resize)
+
 
 window.mainloop()
