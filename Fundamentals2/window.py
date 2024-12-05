@@ -56,7 +56,7 @@ on_window_event_callbacks.append(taskbar_image_resize)
 
 
 print("________Canvas Taskbar Image Areas_______")
-taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="", tags="taskbar_area")
+taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="brown", outline="", tags="taskbar_area")
 taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="", tags="taskbar_notification_area")
 
 def taskbar_image_rectangles_resize(event):
@@ -68,6 +68,29 @@ def taskbar_image_rectangles_resize(event):
     canvas.coords(taskbar_notification_area, taskbar_area_width, event.height - taskbar_height, event.width, event.height)
 
 on_window_event_callbacks.append(taskbar_image_rectangles_resize)
+
+
+print("________Adding Rectangles to the Taskbar__________")
+def create_taskbar_rectangle(x, width, color="red"):
+    rect = canvas.create_rectangle(x, canvas.winfo_height() - taskbar_height,
+                                   x + width, canvas.winfo_height(), fill=color, outline="")
+    return rect
+
+rectangles = []
+rect_colors = ["red", "green", "blue", "yellow"]  # Example colors
+
+# Add rectangles with varying positions and widths
+for i, color in enumerate(rect_colors):
+    rect = create_taskbar_rectangle(10 + i * 60, 50, color)  # Example spacing and width
+    rectangles.append(rect)
+
+def update_rectangles_position(event):
+    for i, rect in enumerate(rectangles):
+        canvas.coords(rect, 10 + i * 60, event.height - taskbar_height,
+                      60 + i * 60, event.height)
+
+on_window_event_callbacks.append(update_rectangles_position)
+
 
 
 window.mainloop()
