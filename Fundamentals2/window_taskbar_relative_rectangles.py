@@ -57,14 +57,15 @@ def taskbar_image_resize(event):
 
 on_window_event_callbacks.append(taskbar_image_resize)
 
-# Function to create rectangles on the taskbar
+
+# Create and manage rectangles on the taskbar
+print("________Adding Rectangles to the Taskbar__________")
+
 def create_taskbar_rectangle(x, width, color="red"):
     rect = canvas.create_rectangle(x, canvas.winfo_height() - taskbar_height,
                                    x + width, canvas.winfo_height(), fill=color, outline="")
     return rect
 
-# Create and manage rectangles on the taskbar
-print("________Adding Rectangles to the Taskbar__________")
 rectangles = []
 rect_colors = ["red", "green", "blue", "yellow"]  # Example colors
 
