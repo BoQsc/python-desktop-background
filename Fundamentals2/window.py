@@ -60,7 +60,7 @@ taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="", tags
 taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="", tags="taskbar_notification_area")
 
 def taskbar_image_rectangles_resize(event):
-    taskbar_area_width = event.width * 0.80 # 68% width for main area
+    taskbar_area_width = event.width * 0.80 
 
     canvas.coords(taskbar_area, 0, event.height - taskbar_height, taskbar_area_width, event.height)
     
