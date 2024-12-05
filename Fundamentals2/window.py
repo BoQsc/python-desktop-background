@@ -56,7 +56,7 @@ on_window_event_callbacks.append(taskbar_image_resize)
 
 
 print("________Canvas Taskbar Image Areas_______")
-taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="brown", outline="", tags="taskbar_area")
+taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="darkblue", outline="", tags="taskbar_area")
 taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="", tags="taskbar_notification_area")
 
 def taskbar_image_rectangles_resize(event):
