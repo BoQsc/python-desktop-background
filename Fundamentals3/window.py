@@ -37,58 +37,27 @@ def background_image_resize(event):
 
 on_window_event_callbacks.append(background_image_resize)
 
-print("________Canvas Taskbar__________")
-taskbar_height = 40
+print("________Canvas Taskbar._________")
+class Taskbar:
+    def __init__(self):
+        Taskbar.height = 40
 
-print("________Canvas Taskbar Image__________")
-taskbar_image = Image.new("RGBA", (1, taskbar_height), (0, 0, 255, 128))  # Initial size of 1px
-taskbar_image = Image.open("taskbar.png")
-taskbar_photo = ImageTk.PhotoImage(taskbar_image)
-image_taskbar = canvas.create_image(0, 0, anchor="nw", image=taskbar_photo)
+        print("________Canvas Taskbar Image__________")
+        Taskbar.image = Image.new("RGBA", (1, Taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
+        Taskbar.image = Image.open("taskbar.png")
+        Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
+        Taskbar.image_taskbar = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
+        
+    def image_resize(self, event):
+        resized_image = Taskbar.image.resize((event.width, Taskbar.height), Image.Resampling.LANCZOS)
+        canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
+        canvas.itemconfig(Taskbar.image_taskbar, image=canvas.tresized_photo)
+        canvas.coords(Taskbar.image_taskbar, 0, event.height - Taskbar.height)  
 
-def taskbar_image_resize(event):
-    resized_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.LANCZOS)
-    canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
-    canvas.itemconfig(image_taskbar, image=canvas.tresized_photo)
-    canvas.coords(image_taskbar, 0, event.height - taskbar_height)  
-
-on_window_event_callbacks.append(taskbar_image_resize)
-
-
-print("________Canvas Taskbar Image Areas_______")
-taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="darkblue", outline="", tags="taskbar_area")
-taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="", tags="taskbar_notification_area")
-
-def taskbar_image_rectangles_resize(event):
-    taskbar_area_width = event.width * 0.80 
-
-    canvas.coords(taskbar_area, 0, event.height - taskbar_height, taskbar_area_width, event.height)
-    
-    notification_area_width = event.width - taskbar_area_width
-    canvas.coords(taskbar_notification_area, taskbar_area_width, event.height - taskbar_height, event.width, event.height)
-
-on_window_event_callbacks.append(taskbar_image_rectangles_resize)
+on_window_event_callbacks.append(Taskbar().image_resize)
 
 
-print("________Adding Rectangles to the Taskbar__________")
-def create_taskbar_rectangle(x, width, color="red"):
-    rect = canvas.create_rectangle(x, canvas.winfo_height() - taskbar_height,
-                                   x + width, canvas.winfo_height(), fill=color, outline="")
-    return rect
 
-rectangles = []
-rect_colors = ["red", "green", "blue", "yellow"]  # Example colors
-
-for i, color in enumerate(rect_colors):
-    rect = create_taskbar_rectangle(10 + i * 60, 50, color)  # Example spacing and width
-    rectangles.append(rect)
-
-def update_rectangles_position(event):
-    for i, rect in enumerate(rectangles):
-        canvas.coords(rect, 10 + i * 60, event.height - taskbar_height,
-                      60 + i * 60, event.height)
-
-on_window_event_callbacks.append(update_rectangles_position)
 
 
 
