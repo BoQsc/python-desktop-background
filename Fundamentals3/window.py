@@ -39,7 +39,7 @@ on_window_event_callbacks.append(background_image_resize)
 
 print("________Canvas Taskbar._________") # Make Taskbar update function that does initialization and updates to the taskbar. Use init to do first init function before updating further.
 class Taskbar:
-    def __init__(self): # BUG: Taskbar() - always initializes.
+    def __init__(self): # BUG: Taskbar() - always initializes/creates new Taskbar.
         Taskbar.height = 40
 
         print("________Canvas Taskbar Image__________")
