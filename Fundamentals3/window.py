@@ -47,24 +47,25 @@ class Taskbar:
         Taskbar.image = Image.open("taskbar.png")
         Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
         Taskbar.image_taskbar = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
+
+    def image_resize(self, event=None):
+        if event:
+            resized_image = Taskbar.image.resize((event.width, Taskbar.height), Image.Resampling.LANCZOS)
+        else:
+            resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
         
-    def image_resize(self, event):
-        resized_image = Taskbar.image.resize((event.width, Taskbar.height), Image.Resampling.LANCZOS)
         canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_taskbar, image=canvas.tresized_photo)
-        canvas.coords(Taskbar.image_taskbar, 0, event.height - Taskbar.height)  
+        canvas.coords(Taskbar.image_taskbar, 0, canvas.winfo_height() - Taskbar.height)
 
-on_window_event_callbacks.append(Taskbar().image_resize)
+taskbar = Taskbar()
+on_window_event_callbacks.append(taskbar.image_resize)
 
 # Create a simple button widget
 def increment_height():
     Taskbar.height += 1
+    taskbar.image_resize()
     print(f"New Taskbar height: {Taskbar.height}")
-button = tkinter.Button(canvas, text="Click Me", command=increment_height)
-button.pack(pady=0, side="top")  # Add the button to the bottom without affecting the window size
-
-
-
 
 
 window.mainloop()
