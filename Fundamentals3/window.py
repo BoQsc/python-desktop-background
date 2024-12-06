@@ -56,6 +56,12 @@ class Taskbar:
 
 on_window_event_callbacks.append(Taskbar().image_resize)
 
+# Create a simple button widget
+def increment_height():
+    Taskbar.height += 1
+    print(f"New Taskbar height: {Taskbar.height}")
+button = tkinter.Button(canvas, text="Click Me", command=increment_height)
+button.pack(pady=0, side="top")  # Add the button to the bottom without affecting the window size
 
 
 
