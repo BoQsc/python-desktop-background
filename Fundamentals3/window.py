@@ -59,7 +59,7 @@ class Taskbar:
         if event:
             resized_image = Taskbar.image.resize((event.width, Taskbar.height), Image.Resampling.LANCZOS)
         else:
-            resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
+            resized_image = Taskbar.image.resize((Taskbar.width, Taskbar.height), Image.Resampling.LANCZOS)
         
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_taskbar, image=Taskbar.resized_photo)
