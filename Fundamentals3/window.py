@@ -45,24 +45,24 @@ on_window_event_callbacks.append(background_image_resize)
 
 print("________Canvas Taskbar._________") # Make Taskbar update function that does initialization and updates to the taskbar. Use init to do first init function before updating further.
 class Taskbar:
-    def __init__(taskbar): # BUG: Taskbar() - always initializes/creates new Taskbar. Add singleton if statement or look for a way to reference once in the entire program.
-        taskbar.height = 40
+    def __init__(Taskbar): # BUG: Taskbar() - always initializes/creates new Taskbar. Add singleton if statement or look for a way to reference once in the entire program.
+        Taskbar.height = 40
 
         print("________Canvas Taskbar Image__________")
-        taskbar.image = Image.new("RGBA", (1, taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
-        taskbar.image = Image.open("taskbar.png")
-        taskbar.photo = ImageTk.PhotoImage(taskbar.image)
-        taskbar.image_taskbar = canvas.create_image(0, 0, anchor="nw", image=taskbar.photo)
+        Taskbar.image = Image.new("RGBA", (1, Taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
+        Taskbar.image = Image.open("taskbar.png")
+        Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
+        Taskbar.image_taskbar = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
-    def image_resize(taskbar, event=None):
+    def image_resize(Taskbar, event=None):
         if event:
-            resized_image = taskbar.image.resize((event.width, taskbar.height), Image.Resampling.LANCZOS)
+            resized_image = Taskbar.image.resize((event.width, Taskbar.height), Image.Resampling.LANCZOS)
         else:
-            resized_image = taskbar.image.resize((canvas.winfo_width(), taskbar.height), Image.Resampling.LANCZOS)
+            resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
         
         canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
-        canvas.itemconfig(taskbar.image_taskbar, image=canvas.tresized_photo)
-        canvas.coords(taskbar.image_taskbar, 0, canvas.winfo_height() - taskbar.height)
+        canvas.itemconfig(Taskbar.image_taskbar, image=canvas.tresized_photo)
+        canvas.coords(Taskbar.image_taskbar, 0, canvas.winfo_height() - Taskbar.height)
 
 taskbar = Taskbar()
 on_window_event_callbacks.append(taskbar.image_resize)
