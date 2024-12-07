@@ -60,8 +60,8 @@ class Taskbar:
         else:
             resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
         
-        canvas.tresized_photo = ImageTk.PhotoImage(resized_image)
-        canvas.itemconfig(Taskbar.image_taskbar, image=canvas.tresized_photo)
+        Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
+        canvas.itemconfig(Taskbar.image_taskbar, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_taskbar, 0, canvas.winfo_height() - Taskbar.height)
 
 taskbar = Taskbar()
