@@ -47,6 +47,7 @@ print("________Canvas Taskbar._________") # Make Taskbar update function that do
 class Taskbar:
     def __init__(Taskbar): # BUG: Taskbar() - always initializes/creates new Taskbar. Add singleton if statement or look for a way to reference once in the entire program.
         Taskbar.height = 40
+        Taskbar.width = canvas.winfo_width()
 
         print("________Canvas Taskbar Image__________")
         Taskbar.image = Image.new("RGBA", (1, Taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
