@@ -4,7 +4,7 @@ print(description:=
 """
 This is Canvas only project. Tkinter Canvas is used to render entire User Interface.
 The Image object PhotoImage is used as a way to provide transparent widget elements 
-and to make up most parts of this project.
+and to make up most parts of this project. For more information visit the website.
 """)
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget______________________")
