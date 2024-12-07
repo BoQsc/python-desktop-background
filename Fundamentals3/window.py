@@ -2,7 +2,7 @@ print(program:="Python Desktop [Version 0.0.0]".replace("0.0.0", version:="0.0.1
 print(credits:="Public Domain. No rights reserved.")
 print(description:=
 """
-This is Canvas only project. Tkinter Canvas is used to render entire user interface.
+This is Canvas only project. Tkinter Canvas is used to render entire User Interface.
 The Image object PhotoImage is used as a way to provide transparent widget elements 
 and to make up most parts of this project.
 """)
