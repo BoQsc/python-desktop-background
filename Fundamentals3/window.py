@@ -53,7 +53,7 @@ class Taskbar:
         Taskbar.image = Image.new("RGBA", (1, Taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
         Taskbar.image = Image.open("taskbar.png")
         Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
-        Taskbar.image_taskbar = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
+        Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
     def image_resize(Taskbar, event=None):
         if event:
@@ -62,8 +62,8 @@ class Taskbar:
             resized_image = Taskbar.image.resize((Taskbar.width, Taskbar.height), Image.Resampling.LANCZOS)
         
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
-        canvas.itemconfig(Taskbar.image_taskbar, image=Taskbar.resized_photo)
-        canvas.coords(Taskbar.image_taskbar, 0, canvas.winfo_height() - Taskbar.height)
+        canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
+        canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
 
 taskbar = Taskbar()
 on_window_event_callbacks.append(taskbar.image_resize)
