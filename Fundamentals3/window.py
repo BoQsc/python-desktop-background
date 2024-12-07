@@ -1,6 +1,8 @@
 print(program:="Python Desktop [Version 0.0.0]".replace("0.0.0", version:="0.0.1"))
 print(credits:="Public Domain. No rights reserved.")
-print(description:="This is Canvas only project. Tkinter Canvas is used to render entire user interface.")
+print(description:="""This is Canvas only project. Tkinter Canvas is used to render entire user interface.
+The Image object PhotoImage is used as a way to provide transparent widget elements 
+and to make up most parts of this project.""")
 print("_______PIP Auto install Dependencies__________")
 print("________TK Window Widget______________________")
 __import__('os').system('title ' + program + "(Console)")
