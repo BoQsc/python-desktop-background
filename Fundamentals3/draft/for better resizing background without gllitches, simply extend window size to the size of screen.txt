@@ -1,0 +1,1 @@
+This might allow for smooth full screen, at a possible cost of worse awareness from Operating System about the state of the main program window.
