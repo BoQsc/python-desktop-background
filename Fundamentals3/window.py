@@ -17,15 +17,8 @@ window = tkinter.Tk()
 window.title(program + " - " + __import__('time').strftime("%Y-%m-%d"))
 window.geometry("800x600")
 
-print("________TK Window Events______________________")
+print("________TK Window Events Init______________________")
 on_window_event_callbacks = []
-def on_window_event(event):
-    canvas.config(width=event.width, height=event.height)
-    for callback in on_window_event_callbacks:
-        callback(event)
-
-window.bind("<Configure>", on_window_event)
-window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
 print("________TK Loading canvas widget______________")
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
@@ -75,5 +68,15 @@ def increment_height():
     
 button = tkinter.Button(canvas, text="Click Me", command=increment_height)
 canvas.create_window((10, 10), window=button, anchor="nw")
+
+print("________TK Window Events______________________")
+
+def on_window_event(event):
+    canvas.config(width=event.width, height=event.height)
+    for callback in on_window_event_callbacks:
+        callback(event)
+
+window.bind("<Configure>", on_window_event)
+window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
 
 window.mainloop()
