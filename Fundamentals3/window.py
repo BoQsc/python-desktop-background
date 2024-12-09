@@ -52,7 +52,7 @@ class Taskbar:
         Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
         Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
-    def update_image(window_event=None):
+    def update_image_position(window_event=None):
         if not hasattr(Taskbar, "image"): Taskbar.initialize_image()
 
         resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
@@ -62,13 +62,13 @@ class Taskbar:
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
 
        
-on_window_event_callbacks.append(Taskbar.update_image)
+on_window_event_callbacks.append(Taskbar.update_image_position)
 
 
 # Create a simple button widget
 def increment_height():
     Taskbar.height += 1
-    Taskbar.update_image()
+    Taskbar.update_image_position()
     
 button = tkinter.Button(canvas, text="Click Me", command=increment_height)
 canvas.create_window((10, 10), window=button, anchor="nw")
