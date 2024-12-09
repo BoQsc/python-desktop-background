@@ -15,6 +15,7 @@ from PIL import Image, ImageTk
 
 window = tkinter.Tk()
 window.title(program + " - " + __import__('time').strftime("%Y-%m-%d"))
+window.geometry("800x600")
 
 print("________TK Window Events______________________")
 on_window_event_callbacks = []
