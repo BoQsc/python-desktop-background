@@ -43,32 +43,30 @@ def background_image_resize(event):
 
 on_window_event_callbacks.append(background_image_resize)
 
- # Make Taskbar update function that does initialization and updates to the taskbar. Use init to do first init function before updating further.
-print("________Canvas Taskbar_________")  # Taskbar update function to handle initialization and updates.
-
+print("________Canvas Taskbar_________") # Make Taskbar update function that does initialization and updates to the taskbar. Use init to do first init function before updating further.
 class Taskbar:
-    initialized = False  # Track whether the taskbar is initialized
+    def __init__(Taskbar): # BUG: Taskbar() - always initializes/creates new Taskbar. Add singleton if statement or look for a way to reference once in the entire program.
+        Taskbar.height = 40
+        Taskbar.width = canvas.winfo_width()
 
-    def update_image(Taskbar, canvas, window_event=None):
-        if not Taskbar.initialized:
-            # Initialization logic
-            Taskbar.height = 40
-            Taskbar.width = canvas.winfo_width()
-            print("________Canvas Taskbar Image__________")
-            Taskbar.image = Image.open("taskbar.png")
-            Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
-            Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
-            Taskbar.initialized = True
+        print("________Canvas Taskbar Image__________")
+        Taskbar.image = Image.new("RGBA", (1, Taskbar.height), (0, 0, 255, 128))  # Initial size of 1px
+        Taskbar.image = Image.open("taskbar.png")
+        Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
+        Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
-        # Update logic
-        new_width = window_event.width if window_event else canvas.winfo_width()
-        resized_image = Taskbar.image.resize((new_width, Taskbar.height), Image.Resampling.LANCZOS)
+    def update_image(Taskbar, window_event=None):
+        if window_event:
+            resized_image = Taskbar.image.resize((window_event.width, Taskbar.height), Image.Resampling.LANCZOS)
+        else:
+            resized_image = Taskbar.image.resize((Taskbar.width, Taskbar.height), Image.Resampling.LANCZOS)
+        
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
 
 taskbar = Taskbar()
-on_window_event_callbacks.append(lambda event: taskbar.update_image(canvas, event))
+on_window_event_callbacks.append(taskbar.update_image)
 
 
 
