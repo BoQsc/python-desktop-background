@@ -53,8 +53,8 @@ class Taskbar:
         Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
     def update_image(window_event=None):
-        if not hasattr(Taskbar, "image"):
-            Taskbar.initialize_image()
+        if not hasattr(Taskbar, "image"): Taskbar.initialize_image()
+
         resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
 
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
