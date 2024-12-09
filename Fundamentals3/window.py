@@ -42,6 +42,7 @@ class Taskbar:
     def initialize_image():
         print("________Canvas Taskbar Image__________")
         Taskbar.height = 40
+        Taskbar.width = canvas.winfo_width()
         Taskbar.image = Image.open("taskbar.png")
         Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
         Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
@@ -50,7 +51,7 @@ class Taskbar:
         if not hasattr(Taskbar, "image"): Taskbar.initialize_image()
 
         resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
-
+        print(Taskbar.width)
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
