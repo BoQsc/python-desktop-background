@@ -38,7 +38,7 @@ background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
 def background_image_resize(event):
-    resized_image = background_image.resize((event.width, event.height), Image.Resampling.NEAREST)
+    resized_image = background_image.resize((canvas.winfo_width(), canvas.winfo_height()), Image.Resampling.NEAREST)
     canvas.resized_photo = ImageTk.PhotoImage(resized_image)
     canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
 
