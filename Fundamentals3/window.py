@@ -47,7 +47,6 @@ print("________Canvas Taskbar_________") # Make Taskbar update function that doe
 class Taskbar:
     height = 40
 
-    @staticmethod
     def update_image(window_event=None):
         if not hasattr(Taskbar, "image"):
             Taskbar.width = canvas.winfo_width()
