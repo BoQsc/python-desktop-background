@@ -47,8 +47,8 @@ print("________Canvas Taskbar_________") # Make Taskbar update function that doe
 class Taskbar:
     def update_image(window_event=None):
         if not hasattr(Taskbar, "image"):
-            Taskbar.height = 40
             print("________Canvas Taskbar Image__________")
+            Taskbar.height = 40
             Taskbar.image = Image.open("taskbar.png")
             Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
             Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
