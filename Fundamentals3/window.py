@@ -64,21 +64,16 @@ class Taskbar:
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
+        print(f"New Taskbar height: {Taskbar.height}")
 
 on_window_event_callbacks.append(Taskbar.update_image)
-
-
-
-
-
-
 
 
 # Create a simple button widget
 def increment_height():
     Taskbar.height += 1
     Taskbar.update_image()
-    print(f"New Taskbar height: {Taskbar.height}")
+    
 
 button = tkinter.Button(canvas, text="Click Me", command=increment_height)
 canvas.create_window((10, 10), window=button, anchor="nw")
