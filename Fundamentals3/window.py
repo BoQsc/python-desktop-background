@@ -53,10 +53,8 @@ class Taskbar:
             Taskbar.photo = ImageTk.PhotoImage(Taskbar.image)
             Taskbar.image_placed = canvas.create_image(0, 0, anchor="nw", image=Taskbar.photo)
 
-        if window_event:
-            resized_image = Taskbar.image.resize((window_event.width, Taskbar.height), Image.Resampling.LANCZOS)
-        else:
-            resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
+
+        resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
 
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
