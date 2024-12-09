@@ -64,6 +64,8 @@ class Taskbar:
 
        
 on_window_event_callbacks.append(Taskbar.update_image_position)
+Taskbar.initialize_image() #  binded window resize event needs resize once, therefore this is needed.
+
 
 
 # Create a simple button widget
