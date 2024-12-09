@@ -76,9 +76,9 @@ on_window_event_callbacks.append(Taskbar.update_image)
 
 # Create a simple button widget
 def increment_height():
-    taskbar.height += 1
-    taskbar.image_resize()
-    print(f"New Taskbar height: {taskbar.height}")
+    Taskbar.height += 1
+    Taskbar.update_image()
+    print(f"New Taskbar height: {Taskbar.height}")
 
 button = tkinter.Button(canvas, text="Click Me", command=increment_height)
 canvas.create_window((10, 10), window=button, anchor="nw")
