@@ -73,7 +73,6 @@ def increment_height():
     Taskbar.height += 1
     Taskbar.update_image()
     
-
 button = tkinter.Button(canvas, text="Click Me", command=increment_height)
 canvas.create_window((10, 10), window=button, anchor="nw")
 
