@@ -48,8 +48,9 @@ class Taskbar:
     height = 40
 
     def update_image(window_event=None):
+        print(canvas.winfo_width())
         if not hasattr(Taskbar, "image"):
-            Taskbar.width = canvas.winfo_width()
+
 
             print("________Canvas Taskbar Image__________")
             Taskbar.image = Image.open("taskbar.png")
@@ -59,13 +60,14 @@ class Taskbar:
         if window_event:
             resized_image = Taskbar.image.resize((window_event.width, Taskbar.height), Image.Resampling.LANCZOS)
         else:
-            resized_image = Taskbar.image.resize((Taskbar.width, Taskbar.height), Image.Resampling.LANCZOS)
+            resized_image = Taskbar.image.resize((canvas.winfo_width(), Taskbar.height), Image.Resampling.LANCZOS)
 
+        # Make sure to keep a reference to the PhotoImage to prevent garbage collection
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
-        print(f"New Taskbar height: {Taskbar.height}")
 
+        print(f"New Taskbar height: {Taskbar.height}")
 on_window_event_callbacks.append(Taskbar.update_image)
 
 
