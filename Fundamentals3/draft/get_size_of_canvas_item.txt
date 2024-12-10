@@ -1,0 +1,6 @@
+        # Get size of canvas item.
+        bbox = canvas.bbox(Taskbar.image_placed)  # Using a tag to group multiple items
+        if bbox:
+            width = bbox[2] - bbox[0]
+            height = bbox[3] - bbox[1]
+            print(f"Group Width: {width}, Group Height: {height}")
