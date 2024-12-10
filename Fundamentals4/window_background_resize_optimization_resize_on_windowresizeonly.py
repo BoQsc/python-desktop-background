@@ -53,5 +53,6 @@ def on_window_event(event):
 
 window.bind("<Configure>", on_window_event)
 window.bind("<F11>", lambda event: window.attributes("-fullscreen", not window.attributes("-fullscreen")))
+window.after(100, lambda: window.geometry(f"{window.winfo_width()-1}x{window.winfo_height()-1}"))
 
 window.mainloop()
