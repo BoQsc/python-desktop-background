@@ -55,7 +55,12 @@ class Taskbar:
         Taskbar.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(Taskbar.image_placed, image=Taskbar.resized_photo)
         canvas.coords(Taskbar.image_placed, 0, canvas.winfo_height() - Taskbar.height)
-
+        # Get size of canvas item.
+        bbox = canvas.bbox(Taskbar.image_placed)  # Using a tag to group multiple items
+        if bbox:
+            width = bbox[2] - bbox[0]
+            height = bbox[3] - bbox[1]
+            print(f"Group Width: {width}, Group Height: {height}")
        
 on_window_event_callbacks.append(Taskbar.update_image_position)
 Taskbar.initialize_image() #  binded window resize event needs resize once, therefore this is needed.
