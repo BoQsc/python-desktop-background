@@ -1,4 +1,5 @@
 import tkinter
+from PIL import Image, ImageTk
 
 window = tkinter.Tk()
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
@@ -12,7 +13,6 @@ def on_window_event(event):
 
 window.bind("<Configure>", on_window_event)
 
-from PIL import Image, ImageTk
 background_file = "background.png"
 background_image = Image.open(background_file)
 
