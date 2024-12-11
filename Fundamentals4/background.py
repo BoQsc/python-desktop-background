@@ -22,7 +22,7 @@ canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=backgrou
 def resize_background_image(event, _last=[None, None]):
     if (event.width, event.height) != tuple(_last):
         _last[:] = [event.width, event.height]
-        resized_image = background_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
+        resized_image = background_image.resize((event.width, event.height), Image.Resampling.NEAREST)
         canvas.resized_photo = ImageTk.PhotoImage(resized_image)
         canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
 
