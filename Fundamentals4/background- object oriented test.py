@@ -10,16 +10,14 @@ class Window:
     def on_window_event(self, event):
         print("Resize test")
 
+window = Window()
+
 class Canvas:
     def __init__(self, window):
         self.widget = tkinter.Canvas(window.widget, bg="gray", highlightthickness=0)
         self.widget.pack(fill="both", expand=True)
 
-# Create the main window
-window = Window()
-
-# Add the canvas to the window
 canvas = Canvas(window)
 
-# Start the main loop
+
 window.widget.mainloop()
