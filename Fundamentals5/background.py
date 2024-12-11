@@ -29,8 +29,4 @@ def resize_background_image(event, _last=[None, None]):
 
 on_window_event_callbacks.append(resize_background_image)
 
-
-
-
-
 window.mainloop()
