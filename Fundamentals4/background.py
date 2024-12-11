@@ -23,7 +23,7 @@ def resize_background_image(event, _last=[None, None]):
         _last[:] = [event.width, event.height]
 
         def resize_with_delay():
-            time.sleep(0.5)
+            
             resized_image = background_image.resize((event.width, event.height), Image.Resampling.NEAREST)
             new_photo = ImageTk.PhotoImage(resized_image)
             canvas.itemconfig(canvas_background_widget, image=new_photo)
