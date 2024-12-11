@@ -1,6 +1,7 @@
 import tkinter
 from PIL import Image, ImageTk
 
+print("Loading Window Canvas")
 window = tkinter.Tk()
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True)
