@@ -10,7 +10,11 @@ def on_window_event(event):
         callback(event)
 window.bind("<Configure>", on_window_event)
 
-
+from PIL import Image, ImageTk
+background_file = "background.png"
+background_image = Image.open(background_file)
+background_photo = ImageTk.PhotoImage(image=background_image)
+canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
 def testz(event):
     print("teeest")
