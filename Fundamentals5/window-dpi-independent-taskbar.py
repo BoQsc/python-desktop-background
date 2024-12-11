@@ -35,13 +35,13 @@ on_window_event_callbacks.append(resize_background_image)
 canvas.taskbar_image = Image.open("taskbar.png")
 
 def update_taskbar(event):
-    window_height = canvas.winfo_height()
-    taskbar_height = max(1, int(window_height * 0.047))  # Ensure positive height
+    canvas_height = canvas.winfo_height()
+    taskbar_height = max(1, int(canvas_height * 0.047))  # Ensure positive height
 
     resized_image = canvas.taskbar_image.resize((canvas.winfo_width(), taskbar_height), Image.Resampling.NEAREST)
     canvas.taskbar_photo_resized = ImageTk.PhotoImage(resized_image)
     canvas.itemconfig(canvas.taskbar_image_placed, image=canvas.taskbar_photo_resized)
-    canvas.coords(canvas.taskbar_image_placed, 0, window_height - taskbar_height)
+    canvas.coords(canvas.taskbar_image_placed, 0, canvas_height - taskbar_height)
 
 on_window_event_callbacks.append(update_taskbar)
 
