@@ -1,6 +1,9 @@
 import tkinter
 from PIL import Image, ImageTk
 
+from ctypes import windll
+windll.shcore.SetProcessDpiAwareness(1)
+
 print("Loading Window Canvas")
 window = tkinter.Tk()
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
