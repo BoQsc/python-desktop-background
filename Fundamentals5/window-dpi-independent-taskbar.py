@@ -36,6 +36,7 @@ canvas.taskbar_image = Image.open("taskbar.png")
 
 def update_taskbar(event):
     canvas_height = canvas.winfo_height()
+    print(canvas_height)
     taskbar_height = max(1, int(canvas_height * 0.047))  # Ensure positive height
 
     resized_image = canvas.taskbar_image.resize((canvas.winfo_width(), taskbar_height), Image.Resampling.NEAREST)
