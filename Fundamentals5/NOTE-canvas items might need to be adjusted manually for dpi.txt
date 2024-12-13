@@ -1,0 +1,8 @@
+According to tk_scaling_factor.py, it might be that widgets are automatically adjusted for dpi.
+Meanwhile the canvas items have to be adjusted manually for DPI.
+
+Canvas items are DPI dependant. Meaning they change size depending on the DPI.
+DPI independant canvas items handled to appear the same way accross devices without scaling to DPI.
+
+Or maybe it's opposite. DPI independent automatically scaled over multiple pixels, ignoring the pixels. Treating multiple pixels as single pixel.
+DPI aware, dependent, account for the smaller pixels and do not ignore.
