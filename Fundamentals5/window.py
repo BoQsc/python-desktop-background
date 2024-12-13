@@ -8,6 +8,9 @@ print("Loading Window Canvas")
 window = tkinter.Tk()
 canvas = tkinter.Canvas(window, bg="gray", highlightthickness=0)
 canvas.pack(fill="both", expand=True)
+scaling_factor = window.tk.call('tk', 'scaling')
+canvas.scale("all", 0, 0, scaling_factor, scaling_factor)
+
 
 on_window_event_callbacks = []
 
