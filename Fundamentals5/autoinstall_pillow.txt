@@ -1,0 +1,13 @@
+import sys
+import subprocess
+
+def install_and_restart():
+    try:
+        import PIL
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "Pillow"])
+        print("Pillow installed. Restarting...")
+        subprocess.run([sys.executable] + sys.argv)
+        sys.exit()
+
+install_and_restart()
