@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 import time
+import threading
 
 # Load the BMP image
 def load_bmp(filename):
@@ -71,7 +72,6 @@ label.pack()
 
 # Resize the image to 400x400 pixels
 def resize_to_400():
-    global width, height, pixels, photo, label
     new_width = 400
     new_height = 400
     new_pixels = resize_image(width, height, pixels, new_width, new_height)
@@ -108,7 +108,6 @@ def resize_to_400():
 
 # Resize the image to 500x500 pixels
 def resize_to_500():
-    global width, height, pixels, photo, label
     new_width = 500
     new_height = 500
     new_pixels = resize_image(width, height, pixels, new_width, new_height)
@@ -141,7 +140,12 @@ def resize_to_500():
     label.config(image=new_photo)
     label.image = new_photo  # Keep a reference to prevent garbage collection
 
+# Start the resizing process in a separate thread
+def start_resizing():
+    thread = threading.Thread(target=resize_to_400)
+    thread.start()
+
 # Start the resizing process
-resize_to_400()
+start_resizing()
 
 root.mainloop()
