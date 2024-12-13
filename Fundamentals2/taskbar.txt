@@ -1,0 +1,6 @@
+640x50 resolution choice:
+640 is standard VGA Width, which means it is supported by most monitors.
+50 height is regular heights of taskbar, a custom choice.
+
+640 width was also chosen to easily see if taskbar resizing of width to the screen width is working.
+It is small enough but standard size to support VGA even if for some reason the taskbar width resizing do not work.
