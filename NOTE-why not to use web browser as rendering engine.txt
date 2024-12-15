@@ -1,0 +1,1 @@
+Web browsers often with kiosk mode might cause unintended behaviours like asking for update and various popups asking for setting it as default browser.
