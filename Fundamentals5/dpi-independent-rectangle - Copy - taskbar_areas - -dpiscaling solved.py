@@ -25,7 +25,7 @@ canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=backgrou
 
 # Load taskbar image
 taskbar_image = Image.open("taskbar.png")
-taskbar_photo = None  # Placeholder for the resized taskbar photo
+taskbar_photo = ImageTk.PhotoImage(image=taskbar_image)  # Placeholder for the resized taskbar photo
 taskbar_height = int(32 * dpi_scaling)  # Taskbar height based on DPI scaling
 
 # Taskbar rectangles
@@ -59,6 +59,7 @@ def resize_taskbar(event):
     taskbar_photo = ImageTk.PhotoImage(resized_taskbar_image)
     taskbar_widget = canvas.create_image(0, event.height - taskbar_height, anchor="nw", image=taskbar_photo)
     canvas.tag_lower(taskbar_widget)  # Ensure the image is below other widgets
+    #canvas.tag_raise(taskbar_widget)  # Ensure the image is above other widgets
 
 on_window_event_callbacks.append(resize_taskbar)
 
