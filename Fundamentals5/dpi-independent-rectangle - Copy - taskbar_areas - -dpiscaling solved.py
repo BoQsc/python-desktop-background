@@ -47,7 +47,7 @@ def resize_taskbar(event):
     global taskbar_photo
 
     # Calculate dimensions
-    taskbar_area_width = int(event.width * 0.40 + dpi_scaling)    # 80% width for the main area
+    taskbar_area_width = int(event.width * 0.77 + dpi_scaling)    # 80% width for the main area
     notification_area_width = event.width - taskbar_area_width
 
     # Update taskbar rectangles
