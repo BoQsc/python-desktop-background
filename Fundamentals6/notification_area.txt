@@ -1,0 +1,8 @@
+The notification area expands to 30% of taskbar, depending on how many try icons are visible.
+The taskbar always expanding to meet notification area.
+The notification area contains clock widget, Language picker, notification menu button and all windows button to hide and show.
+How to ignore the Desktop app? List all active windows then minimize or restore all except the Desktop app.
+Task manager seems to show Window Explorer all the time and offers a restart button.
+
+
+ 
