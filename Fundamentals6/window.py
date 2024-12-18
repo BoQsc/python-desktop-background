@@ -37,7 +37,7 @@ on_window_event_callbacks.append(resize_background_image)
 def resize_taskbar(event):
     global taskbar_photo
 
-    taskbar_area_width = int(event.width * 0.77 + dpi_scaling)    # 77% width for the main area
+    taskbar_area_width = int(event.width * 0.77 + dpi_scaling)    
     notification_area_width = event.width - taskbar_area_width
 
     canvas.coords(taskbar_area, 0, event.height - taskbar_height, taskbar_area_width, event.height)
@@ -46,7 +46,7 @@ def resize_taskbar(event):
     resized_taskbar_image = taskbar_image.resize((event.width, taskbar_height), Image.Resampling.NEAREST)
     taskbar_photo = ImageTk.PhotoImage(resized_taskbar_image)
     taskbar_widget = canvas.create_image(0, event.height - taskbar_height, anchor="nw", image=taskbar_photo)
-    canvas.tag_lower(taskbar_widget)  # Ensure the image is below other widgets
+    canvas.tag_lower(taskbar_widget)  
 
 on_window_event_callbacks.append(resize_taskbar)
 
