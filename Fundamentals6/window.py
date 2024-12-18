@@ -48,17 +48,18 @@ def resize_taskbar(event):
     taskbar_widget = canvas.create_image(0, event.height - taskbar_height, anchor="nw", image=taskbar_photo)
     canvas.tag_lower(taskbar_widget)
 
-    # Define the positions of 6 rectangles
+    # Number of rectangles and padding
     num_rectangles = 6
-    rect_width = taskbar_area_width // num_rectangles
-    rect_height = taskbar_height - 10  # Padding from taskbar edges
+    padding = 6
+    rect_width = (taskbar_area_width - (num_rectangles + 1) * padding) // num_rectangles
 
+    canvas.delete("rects")  # Delete existing rectangles
     for i in range(num_rectangles):
-        left = i * rect_width
-        right = left + rect_width
-        top = event.height - taskbar_height + 5
-        bottom = event.height - 5  # Padding from taskbar edges
-        canvas.create_rectangle(left, top, right, bottom, fill="green", outline="")
+        x1 = i * (rect_width + padding)
+        x2 = x1 + rect_width
+        y1 = event.height - taskbar_height + padding
+        y2 = event.height - padding
+        canvas.create_rectangle(x1, y1, x2, y2, fill="red", outline="", tags="rects")
 
 on_window_event_callbacks.append(resize_taskbar)
 
