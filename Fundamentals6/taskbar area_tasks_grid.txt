@@ -1,0 +1,1 @@
+tasks grid items are suppose to be fixed size and resize exponentially
