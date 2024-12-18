@@ -1,77 +1,69 @@
 import ctypes
-from ctypes import wintypes
+import tkinter as tk
+from tkinter import ttk
+import winreg as reg
 
 # Load necessary Windows libraries
-ole32_dll = ctypes.windll.ole32
-mmdeviceapi = ctypes.windll.MMDevAPI
-propsys = ctypes.windll.ProgID  # Ensure this is correctly handled
+dsound_dll = ctypes.windll.LoadLibrary("dsound.dll")
+ole32_dll = ctypes.oledll.ole32
 
 # Define necessary Windows types
-class PROPERTYKEY(ctypes.Structure):
-    _fields_ = [("fmtid", ctypes.c_int64), ("pid", ctypes.c_int)]
+LPDSENUMCALLBACK = ctypes.WINFUNCTYPE(ctypes.c_bool,
+                                      ctypes.c_void_p,
+                                      ctypes.c_wchar_p,
+                                      ctypes.c_wchar_p,
+                                      ctypes.c_void_p)
 
-PKEY_Device_FriendlyName = PROPERTYKEY(0xDE1AB5B3C8BF4014, 13)  # Defined property key for device name
+def get_devices():
+    devices = []
 
-IMMDeviceEnumerator = ctypes.POINTER(ctypes.c_void_p)
-IMMDeviceCollection = ctypes.POINTER(ctypes.c_void_p)
-IMMDevice = ctypes.POINTER(ctypes.c_void_p)
-IPropertyStore = ctypes.POINTER(ctypes.c_void_p)
+    def cb_enum(lpGUID, lpszDesc, lpszDrvName, _unused):
+        dev = ""
+        if lpGUID is not None:
+            buf = ctypes.create_unicode_buffer(500)
+            if ole32_dll.StringFromGUID2(ctypes.c_int64(lpGUID), ctypes.byref(buf), 0):
+                dev = buf.value
+        
+        devices.append((lpGUID, lpszDesc, lpszDrvName))
+        return True
 
-# Function to get default audio endpoint
-IMMDeviceEnumerator_CreateInstance = mmdeviceapi.CoCreateInstance
-IMMDeviceEnumerator_CreateInstance.restype = wintypes.HRESULT
-IMMDeviceEnumerator_CreateInstance.argtypes = [wintypes.REFGUID, wintypes.HANDLE, wintypes.DWORD, wintypes.REFGUID, ctypes.POINTER(ctypes.c_void_p)]
-
-# Function to get default audio device
-IMMDeviceEnumerator_GetDefaultAudioEndpoint = mmdeviceapi.CoCreateInstance
-IMMDeviceEnumerator_GetDefaultAudioEndpoint.restype = wintypes.HRESULT
-IMMDeviceEnumerator_GetDefaultAudioEndpoint.argtypes = [wintypes.DWORD, wintypes.DWORD, ctypes.POINTER(ctypes.c_void_p)]
-
-# Function to open property store
-IMMDevice_OpenPropertyStore = IMMDevice.contents[0]  # Example pointer, adjust as necessary
-IMMDevice_OpenPropertyStore.restype = wintypes.HRESULT
-IMMDevice_OpenPropertyStore.argtypes = [wintypes.DWORD, ctypes.POINTER(IPropertyStore)]
-
-# Function to get property value
-IPropertyStore_GetValue = IPropertyStore.contents[0]  # Example pointer, adjust as necessary
-IPropertyStore_GetValue.restype = wintypes.HRESULT
-IPropertyStore_GetValue.argtypes = [ctypes.POINTER(PROPERTYKEY), ctypes.POINTER(ctypes.c_void_p)]
-
-# Function to set default audio playback device
-def set_default_audio_playback_device(devID):
-    hr = mmdeviceapi.CoCreateInstance(ctypes.byref(GUID_CPolicyConfigClient),
-                                      None,
-                                      CLSCTX_ALL,
-                                      ctypes.byref(IPolicyConfigClient),
-                                      ctypes.byref(pPolicyConfig))
-
-    if hr == 0:
-        hr = pPolicyConfig.SetDefaultEndpoint(devID, eConsole)
-        pPolicyConfig.Release()
+    # Enumerate output devices
+    dsound_dll.DirectSoundEnumerateW(LPDSENUMCALLBACK(cb_enum), None)  # Output devices
     
-    return hr
+    return devices
 
-def get_default_output_device():
-    deviceEnumerator = ctypes.c_void_p()
-    hr = IMMDeviceEnumerator_CreateInstance(None, None, 1, ctypes.byref(GUID_MMDeviceEnumerator), ctypes.byref(deviceEnumerator))
-    if hr == 0:
-        device = ctypes.c_void_p()
-        hr = IMMDeviceEnumerator_GetDefaultAudioEndpoint(deviceEnumerator, eRender, eMultimedia, ctypes.byref(device))
-        if hr == 0:
-            propertyStore = ctypes.c_void_p()
-            hr = IMMDevice_OpenPropertyStore(device, 0, ctypes.byref(propertyStore))
-            if hr == 0:
-                friendlyName = ctypes.c_wchar_p()
-                hr = IPropertyStore_GetValue(propertyStore, ctypes.byref(PKEY_Device_FriendlyName), ctypes.byref(friendlyName))
-                if hr == 0:
-                    print(f"Default Output Device: {friendlyName.value}")
-                propertyStore.Release()
-            device.Release()
-        deviceEnumerator.Release()
+def set_default_output_device(guid):
+    key = reg.HKEY_CURRENT_USER
+    subkey = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Audio\Devices"
 
-def main():
-    get_default_output_device()
-    set_default_audio_playback_device("{0.0.1.00000000}.{your-device-guid}")
+    try:
+        with reg.OpenKey(key, subkey, 0, reg.KEY_WRITE) as key_handle:
+            reg.SetValueEx(key_handle, "DefaultDevice", 0, reg.REG_SZ, guid)
+    except FileNotFoundError:
+        print(f"Could not set default output device with GUID {guid}")
+
+def select_output_device():
+    devices = get_devices()
+    device_list = [(desc, guid) for guid, desc, _ in devices]
+    
+    root = tk.Tk()
+    root.title("Select Output Device")
+
+    var = tk.StringVar()
+    ttk.Label(root, text="Select Output Device:").pack(pady=5)
+    device_selector = ttk.Combobox(root, textvariable=var, values=[desc for desc, _ in device_list])
+    device_selector.pack(pady=5)
+    device_selector.set(device_list[0][0])  # Set default value
+
+    def on_select(event):
+        selected_device = var.get()
+        guid = next(guid for desc, guid in device_list if desc == selected_device)
+        print(f"Selected Output Device GUID: {guid}")
+        set_default_output_device(guid)
+
+    device_selector.bind("<<ComboboxSelected>>", on_select)
+
+    root.mainloop()
 
 if __name__ == '__main__':
-    main()
+    select_output_device()
