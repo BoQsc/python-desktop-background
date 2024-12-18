@@ -3,5 +3,5 @@ tasks grid items are suppose to be fixed size and resize exponentially
 The task items are suppose to shrink as more task are added, until there is no more space (empty left-right-border space) to shrink.
 After no more space is left, a taskbar area
 Then the taskbar adds a down arrow symbol to the left of taskbar area. 
-The a new tasks-area2 is added at the bottom. It is hidden.
+The a new tasks-area2 is added at the below/at the bottom. It is hidden.
 Then the task should go to the tasks-area2 as first item.
