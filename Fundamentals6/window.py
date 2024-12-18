@@ -50,8 +50,8 @@ def resize_taskbar(event):
 
     # Number of rectangles and padding
     num_rectangles = 6
-    padding = 6
-    rect_width = (taskbar_area_width - (num_rectangles + 1) * padding) // num_rectangles
+    padding = 1
+    rect_width = 50  # Fixed width for each rectangle
 
     canvas.delete("rects")  # Delete existing rectangles
     for i in range(num_rectangles):
@@ -62,6 +62,7 @@ def resize_taskbar(event):
         canvas.create_rectangle(x1, y1, x2, y2, fill="red", outline="", tags="rects")
 
 on_window_event_callbacks.append(resize_taskbar)
+
 
 def on_window_event(event):
     for callback in on_window_event_callbacks:
