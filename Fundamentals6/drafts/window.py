@@ -19,8 +19,8 @@ background_photo = ImageTk.PhotoImage(image=background_image)
 canvas_background_widget = canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
 taskbar_image = Image.open("taskbar.png")
-taskbar_photo = ImageTk.PhotoImage(image=taskbar_image)  # Placeholder for the resized taskbar photo
-taskbar_height = int(32 * dpi_scaling)  # Taskbar height based on DPI scaling
+taskbar_photo = ImageTk.PhotoImage(image=taskbar_image)  
+taskbar_height = int(32 * dpi_scaling)  
 
 taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="")
 taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="")
