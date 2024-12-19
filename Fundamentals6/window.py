@@ -49,7 +49,7 @@ def resize_taskbar(event):
 
     # Number of rectangles and padding
     padding = 6
-    rect_width = 50  # Fixed width for each rectangle
+    rect_width = 40  # Fixed width for each rectangle
 
     # Calculate max number of rectangles that fit within taskbar_area_width
     num_rectangles = (taskbar_area_width - padding) // (rect_width + padding)
