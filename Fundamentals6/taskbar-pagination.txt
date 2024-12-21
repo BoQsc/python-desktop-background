@@ -1,1 +1,4 @@
 If the rectangles overflowing, then add ability to press button up and down to switch to previous and next  rectangles, by the amount of currrently existing rectangles. Also add numbers to rectangles.
+
+Why every rectangle number increases when I increase width of the window.
+It should not happen.
