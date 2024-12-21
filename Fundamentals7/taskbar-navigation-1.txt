@@ -1,0 +1,7 @@
+
+Taskbar navigation
+
+Let's number the rectanges and let's  add buttons to move forward and backward by the emount of currently displayed rectangles on the taskbar. 
+
+Count how many offset button presses there are depending on how many displayed rectangles.
+display the number of offset button presses required

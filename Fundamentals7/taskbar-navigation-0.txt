@@ -1,0 +1,11 @@
+So here is the problem, 
+I have a taskbar and when it fills up, I need to have up and down buttons to navigate previous items that overflown.
+I realized that having additional hidden taskbars with overflown items would be great.
+You would navigate these hidden taskbars by up and down buttons, you press the button down, and it shows the next hidden taskbar items, you press button up and it shows previous taskbar.
+Each new hidden taskbar should be named tasks-area0 tasks-area1 and so on.
+
+Let's say I have a taskbar and I want navigation to press button down and up the overflown rectangles and vice versa. 
+
+
+It could be implemented as array that gets index adjusted forward or backward.
+Press button down to move array forward and press button up to move array backward, the amount of currently existing rectangles
