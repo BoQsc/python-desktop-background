@@ -10,12 +10,15 @@ def link_positions(canvas, container_id, dependent_id, offset=(0, 0)):
         offset: A tuple (x_offset, y_offset) for the relative position.
     """
     def update_position(event=None):
-        # Get the current position of the container
+        # Get the current position of the container (x1, y1, x2, y2)
         container_coords = canvas.coords(container_id)
-        if container_coords:
-            # Update the dependent item based on the container's position
+        if container_coords and len(container_coords) == 4:
+            x1, y1, x2, y2 = container_coords
             x_offset, y_offset = offset
-            new_coords = (container_coords[0] + x_offset, container_coords[1] + y_offset)
+            # Calculate the dependent's new coordinates
+            dependent_width = canvas.bbox(dependent_id)[2] - canvas.bbox(dependent_id)[0]
+            dependent_height = canvas.bbox(dependent_id)[3] - canvas.bbox(dependent_id)[1]
+            new_coords = (x1 + x_offset, y1 + y_offset, x1 + x_offset + dependent_width, y1 + y_offset + dependent_height)
             canvas.coords(dependent_id, *new_coords)
     
     # Bind motion events to the update function
