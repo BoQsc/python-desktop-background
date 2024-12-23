@@ -4,3 +4,10 @@ Add pagination, and count how many rectangles are non-overflown, each page shoul
 If the width of the taskbar increases then more rectangles should be shown.
 
 bad idea: Those that do not fit, let's create more arrays 
+
+
+
+Make visible-tasks-area
+Make the entire tasks array
+Append rectangle to the end of visible-tasks-area if possible to insert the size of rectangle.
+Increment by visible tasks amount if a button "next" is pressed.
