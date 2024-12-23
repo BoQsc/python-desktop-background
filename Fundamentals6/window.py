@@ -26,6 +26,7 @@ taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="")
 taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray", outline="")
 
 def resize_background_image(event, _last=[None, None]):
+    print("test2")
     if (event.width, event.height) != tuple(_last):
         _last[:] = [event.width, event.height]
         resized_image = background_image.resize((event.width, event.height), Image.Resampling.NEAREST)
@@ -33,9 +34,8 @@ def resize_background_image(event, _last=[None, None]):
         canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
 
 on_window_event_callbacks.append(resize_background_image)
-def resize_taskbar(event,  _last=[None, None]):
-    if (event.width, event.height) == tuple(_last): return
-    _last[:] = [event.width, event.height]
+def resize_taskbar(event):
+
 
     print("test resize")
     global taskbar_photo
@@ -69,7 +69,9 @@ def resize_taskbar(event,  _last=[None, None]):
 on_window_event_callbacks.append(resize_taskbar)
 
 
-def on_window_event(event):
+def on_window_event(event, _last=[None, None]):
+    if (event.width, event.height) == tuple(_last): return
+    _last[:] = [event.width, event.height]
     for callback in on_window_event_callbacks:
         callback(event)
 
