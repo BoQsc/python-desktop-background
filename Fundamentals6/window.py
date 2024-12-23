@@ -33,7 +33,11 @@ def resize_background_image(event, _last=[None, None]):
         canvas.itemconfig(canvas_background_widget, image=canvas.resized_photo)
 
 on_window_event_callbacks.append(resize_background_image)
-def resize_taskbar(event):
+def resize_taskbar(event,  _last=[None, None]):
+    if (event.width, event.height) == tuple(_last): return
+    _last[:] = [event.width, event.height]
+
+    print("test resize")
     global taskbar_photo
 
     taskbar_area_width = int(event.width * 0.77 + dpi_scaling)    
