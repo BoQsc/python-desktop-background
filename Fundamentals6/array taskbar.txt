@@ -11,3 +11,4 @@ Make visible-tasks-area
 Make the entire tasks array
 Append rectangle to the end of visible-tasks-area if possible to insert the size of rectangle.
 Increment by visible tasks amount if a button "next" is pressed.
+Count how many overflown "next" presses needed.
