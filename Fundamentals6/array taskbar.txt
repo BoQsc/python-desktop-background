@@ -1,0 +1,6 @@
+Let's make an array of 50 rectangles for taskbar area.
+If there is overflow, show the non-overflown rectangles.
+Add pagination, and count how many rectangles are non-overflown, each page should have that amount of rectangles.
+If the width of the taskbar increases then more rectangles should be shown.
+
+bad idea: Those that do not fit, let's create more arrays 
