@@ -12,8 +12,7 @@ class RectangleNavigator:
         self.visible_rectangles = 0
     
     def next_page(self):
-        max_pages = (self.total_rectangles + self.visible_rectangles - 1) // self.visible_rectangles
-        if self.current_page < max_pages - 1:
+        if (self.current_page + 1) * self.visible_rectangles < self.total_rectangles:
             self.current_page += 1
             return True
         return False
@@ -27,14 +26,6 @@ class RectangleNavigator:
     def get_visible_range(self):
         start = self.current_page * self.visible_rectangles
         end = min(start + self.visible_rectangles, self.total_rectangles)
-        
-        # Adjust the start position if we're on the last page and it's not full
-        if end == self.total_rectangles and (end - start) < self.visible_rectangles:
-            potential_start = self.total_rectangles - self.visible_rectangles
-            if potential_start >= 0:
-                start = potential_start
-                self.current_page = start // self.visible_rectangles
-        
         return start, end
 
 navigator = RectangleNavigator()
@@ -57,45 +48,38 @@ taskbar_photo = ImageTk.PhotoImage(image=taskbar_image)
 taskbar_height = int(32 * dpi_scaling)  
 
 taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="")
-taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray",outline="")
+taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, outline="gray")
 
+# Store current window dimensions
 current_dimensions = SimpleNamespace(width=window.winfo_width(), height=window.winfo_height())
-
-nav_button_width = 30
-nav_button_height = taskbar_height - 12
 
 def create_nav_buttons(event):
     canvas.delete("nav_buttons")
     
-    # Calculate if buttons should be enabled
-    can_go_prev = navigator.current_page > 0
-    can_go_next = (navigator.current_page + 1) * navigator.visible_rectangles < navigator.total_rectangles
-    
     # Prev button
-    prev_color = "lightgray" if can_go_prev else "gray"
     prev_button = canvas.create_rectangle(
         6, event.height - taskbar_height + 6,
         6 + nav_button_width, event.height - 6,
-        fill=prev_color, tags=("nav_buttons", "prev_button")
+        fill="lightgray", tags=("nav_buttons", "prev_button")
     )
     canvas.create_text(
         6 + nav_button_width/2, event.height - taskbar_height/2,
-        text="<", tags=("nav_buttons", "prev_button"),
-        fill="black" if can_go_prev else "darkgray"
+        text="<", tags=("nav_buttons", "prev_button")
     )
     
     # Next button
-    next_color = "lightgray" if can_go_next else "gray"
     next_button = canvas.create_rectangle(
         42, event.height - taskbar_height + 6,
         42 + nav_button_width, event.height - 6,
-        fill=next_color, tags=("nav_buttons", "next_button")
+        fill="lightgray", tags=("nav_buttons", "next_button")
     )
     canvas.create_text(
         42 + nav_button_width/2, event.height - taskbar_height/2,
-        text=">", tags=("nav_buttons", "next_button"),
-        fill="black" if can_go_next else "darkgray"
+        text=">", tags=("nav_buttons", "next_button")
     )
+
+nav_button_width = 30
+nav_button_height = taskbar_height - 12
 
 def handle_button_click(event):
     clicked_items = canvas.find_withtag("current")
@@ -105,12 +89,13 @@ def handle_button_click(event):
     tags = canvas.gettags(clicked_items[0])
     redraw_needed = False
     
-    if "prev_button" in tags and navigator.current_page > 0:
+    if "prev_button" in tags:
         redraw_needed = navigator.prev_page()
-    elif "next_button" in tags and (navigator.current_page + 1) * navigator.visible_rectangles < navigator.total_rectangles:
+    elif "next_button" in tags:
         redraw_needed = navigator.next_page()
         
     if redraw_needed:
+        # Create a custom event with current window dimensions
         custom_event = SimpleNamespace(
             width=current_dimensions.width,
             height=current_dimensions.height
@@ -179,6 +164,7 @@ on_window_resize_event_callbacks.extend([resize_background_image, resize_taskbar
 def on_window_resize_event(event, _last=[None, None]):
     if (event.width, event.height) == tuple(_last): return
     _last[:] = [event.width, event.height]
+    # Update current dimensions
     current_dimensions.width = event.width
     current_dimensions.height = event.height
     for callback in on_window_resize_event_callbacks:
