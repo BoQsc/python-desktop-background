@@ -57,7 +57,7 @@ taskbar_photo = ImageTk.PhotoImage(image=taskbar_image)
 taskbar_height = int(32 * dpi_scaling)  
 
 taskbar_area = canvas.create_rectangle(0, 0, 0, 0, fill="blue", outline="")
-taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, outline="gray")
+taskbar_notification_area = canvas.create_rectangle(0, 0, 0, 0, fill="gray",outline="")
 
 current_dimensions = SimpleNamespace(width=window.winfo_width(), height=window.winfo_height())
 
